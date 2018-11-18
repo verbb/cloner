@@ -1,0 +1,42 @@
+{
+    "name": "verbb/cloner",
+    "description": "Easily clone sections, entry types, category/tag/user groups, volumes, asset transforms and more.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "clone",
+        "cloner"
+    ],
+    "support": {
+        "email": "support@verbb.io",
+        "issues": "https://github.com/verbb/cloner/issues?state=open",
+        "source": "https://github.com/verbb/cloner",
+        "docs": "https://github.com/verbb/cloner",
+        "rss": "https://github.com/verbb/cloner/commits/v2.atom"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Verbb",
+            "homepage": "https://verbb.io"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "verbb\\cloner\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Cloner",
+        "handle": "cloner",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/cloner/craft-3/CHANGELOG.md",
+        "class": "verbb\\cloner\\Cloner"
+    }
+}
