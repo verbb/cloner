@@ -31,7 +31,6 @@ Supports cloning:
 - Entry Types
 - Global Sets
 - Sections
-- Service
 - Tag Groups
 - User Groups
 - Volume
