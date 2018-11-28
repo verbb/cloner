@@ -31,10 +31,9 @@ Supports cloning:
 - Entry Types
 - Global Sets
 - Sections
-- Service
 - Tag Groups
 - User Groups
-- Volume
+- Volumes
 
 ### Credits
 Based on [Cloner](https://github.com/kymar/craft_cloner) for Craft 2.
