@@ -7,6 +7,9 @@ use verbb\cloner\base\PluginTrait;
 use Craft;
 use craft\base\Plugin;
 use craft\helpers\Json;
+use craft\web\View;
+
+use yii\base\Event;
 
 class Cloner extends Plugin
 {
@@ -41,33 +44,34 @@ class Cloner extends Plugin
 
     private function _registerResources()
     {
-        $request = Craft::$app->getRequest();
+        Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
+            $request = Craft::$app->getRequest();
 
-        // Only ever trigger this for CP requests
-        if ($request->getIsCpRequest()) {
-            $registeredGroups = $this->getService()->getRegisteredGroups();
+            // Only ever trigger this for CP requests
+            if (!$request->getIsConsoleRequest() && $request->getIsCpRequest() && !$request->getAcceptsJson() && !Craft::$app->getUser()->getIsGuest()) {
+                $registeredGroups = $this->getService()->getRegisteredGroups();
 
-            $result = Craft::$app->getUrlManager()->parseRequest($request);
-            list($route, $params) = $result;
+                $route = Craft::$app->requestedRoute;
 
-            if ($route === 'templates/render') {
-                $route = $request->pathInfo;
+                if ($route === 'templates/render') {
+                    $route = $request->pathInfo;
+                }
+
+                // var_dump($route);
+
+                // Find the matching rule-set in our settings, otherwise don't proceed
+                if (!isset($registeredGroups[$route])) {
+                    return;
+                }
+
+                $view = $event->sender;
+                $view->registerAssetBundle(ClonerAsset::class);
+
+                // Render our JS + CSS using the provided rule-set as per the matched route
+                $view->registerJs('new Craft.Cloner(' .
+                    Json::encode($registeredGroups[$route], JSON_UNESCAPED_UNICODE) .
+                ');');
             }
-
-            // var_dump($route);
-
-            // Find the matching rule-set in our settings, otherwise don't proceed
-            if (!isset($registeredGroups[$route])) {
-                return;
-            }
-
-            $view = Craft::$app->getView();
-            $view->registerAssetBundle(ClonerAsset::class);
-
-            // Render our JS + CSS using the provided rule-set as per the matched route
-            $view->registerJs('new Craft.Cloner(' .
-                Json::encode($registeredGroups[$route], JSON_UNESCAPED_UNICODE) .
-            ');');
-        }
+        });
     }
 }
