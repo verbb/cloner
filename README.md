@@ -38,6 +38,12 @@ Supports cloning:
 ### Credits
 Based on [Cloner](https://github.com/kymar/craft_cloner) for Craft 2.
 
+## Show your Support
+
+Cloner is licensed under the MIT license, meaning it will always be free and open source – we love free stuff! If you'd like to show your support to the plugin regardless, buy us a :beers:. Please note that this does not entitle you to any form of support, and is completely optional.
+
+[![Beerpay](https://beerpay.io/verbb/cloner/badge.svg?style=beer-square)](https://beerpay.io/verbb/cloner)
+
 <h2></h2>
 
 <a href="https://verbb.io" target="_blank">
