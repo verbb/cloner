@@ -31,16 +31,25 @@ Craft.Cloner = Garnish.Base.extend({
             this.$table.find('thead tr').each(function() {
                 var $actionElement = $(this).find('td.thin:first');
 
-                var $col = $('<td class="thin"></td>');
-                $actionElement.before($col);
+                if (!$actionElement.length) {
+                    $(this).append('<td class="thin"></td>');
+                } else {
+                    var $col = $('<td class="thin"></td>');
+                    $actionElement.before($col);
+                }
             });
 
             this.$table.find('tbody tr').each(function() {
                 var $actionElement = $(this).find('td.thin:first');
                 var $cloneButton = $('<a class="add icon"></a>');
 
-                var $col = $('<td class="thin"></td>').html($cloneButton);
-                $actionElement.before($col);
+                if (!$actionElement.length) {
+                    var $col = $('<td class="thin"></td>').html($cloneButton);
+                    $(this).append($col);
+                } else {
+                    var $col = $('<td class="thin"></td>').html($cloneButton);
+                    $actionElement.before($col);
+                }
 
                 self.addListener($cloneButton, 'click', 'onCloneButtonClick');
             });

@@ -57,8 +57,6 @@ class Cloner extends Plugin
                     $route = $request->pathInfo;
                 }
 
-                // var_dump($route);
-
                 // Find the matching rule-set in our settings, otherwise don't proceed
                 if (!isset($registeredGroups[$route])) {
                     return;
