@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 - 2019-05-18
+
+### Fixed
+- Fix error when special characters are in the name for cloned items.
+
 ## 1.0.2 - 2019-03-13
 
 ### Fixed
