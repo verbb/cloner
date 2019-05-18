@@ -19,13 +19,13 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $oldEntryId = $request->getParam('id');
-        $newEntryName = $request->getParam('name');
-        $newEntryHandle = StringHelper::toCamelCase($newEntryName);
+        $id = $request->getParam('id');
+        $name = $request->getParam('name');
+        $handle = $request->getParam('handle');
 
-        $oldEntryType = Craft::$app->getSections()->getEntryTypeById($oldEntryId);
+        $oldEntryType = Craft::$app->getSections()->getEntryTypeById($id);
 
-        $entryType = Cloner::$plugin->getEntryTypes()->setupClonedEntryType($oldEntryType, $newEntryName, $newEntryHandle);
+        $entryType = Cloner::$plugin->getEntryTypes()->setupClonedEntryType($oldEntryType, $name, $handle);
 
         if (!Craft::$app->getSections()->saveEntryType($entryType)) {
             Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone entry type.'));
@@ -43,13 +43,13 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $oldSectionId = $request->getParam('id');
-        $newSectionName = $request->getParam('name');
-        $newSectionHandle = StringHelper::toCamelCase($newSectionName);
+        $id = $request->getParam('id');
+        $name = $request->getParam('name');
+        $handle = $request->getParam('handle');
 
-        $oldSection = Craft::$app->getSections()->getSectionById($oldSectionId);
+        $oldSection = Craft::$app->getSections()->getSectionById($id);
 
-        $section = Cloner::$plugin->getSections()->setupClonedSection($oldSection, $newSectionName, $newSectionHandle);
+        $section = Cloner::$plugin->getSections()->setupClonedSection($oldSection, $name, $handle);
 
         if (!Craft::$app->getSections()->saveSection($section)) {
             Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone section.'));
@@ -100,7 +100,7 @@ class CloneController extends Controller
 
         $id = $request->getParam('id');
         $name = $request->getParam('name');
-        $handle = StringHelper::toCamelCase($name);
+        $handle = $request->getParam('handle');
 
         $oldVolume = Craft::$app->getVolumes()->getVolumeById($id);
 
@@ -124,7 +124,7 @@ class CloneController extends Controller
 
         $id = $request->getParam('id');
         $name = $request->getParam('name');
-        $handle = StringHelper::toCamelCase($name);
+        $handle = $request->getParam('handle');
 
         $oldTransform = Craft::$app->getAssetTransforms()->getTransformById($id);
 
@@ -148,7 +148,7 @@ class CloneController extends Controller
 
         $id = $request->getParam('id');
         $name = $request->getParam('name');
-        $handle = StringHelper::toCamelCase($name);
+        $handle = $request->getParam('handle');
 
         $oldCategoryGroup = Craft::$app->getCategories()->getGroupById($id);
 
@@ -172,7 +172,7 @@ class CloneController extends Controller
 
         $id = $request->getParam('id');
         $name = $request->getParam('name');
-        $handle = StringHelper::toCamelCase($name);
+        $handle = $request->getParam('handle');
 
         $oldTagGroup = Craft::$app->getTags()->getTagGroupById($id);
 
@@ -196,7 +196,7 @@ class CloneController extends Controller
 
         $id = $request->getParam('id');
         $name = $request->getParam('name');
-        $handle = StringHelper::toCamelCase($name);
+        $handle = $request->getParam('handle');
 
         $oldGlobalSet = Craft::$app->getGlobals()->getSetById($id);
 
@@ -220,7 +220,7 @@ class CloneController extends Controller
 
         $id = $request->getParam('id');
         $name = $request->getParam('name');
-        $handle = StringHelper::toCamelCase($name);
+        $handle = $request->getParam('handle');
 
         $oldUserGroup = Craft::$app->getUserGroups()->getGroupById($id);
 
