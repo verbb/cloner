@@ -2,7 +2,7 @@
     "name": "verbb/cloner",
     "description": "Easily clone sections, entry types, category/tag/user groups, volumes, asset transforms and more.",
     "type": "craft-plugin",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "keywords": [
         "craft",
         "cms",

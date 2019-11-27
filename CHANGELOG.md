@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4 - 2019-05-18
+
+### Added
+- Add site cloning support.
+
 ## 1.0.3 - 2019-05-18
 
 ### Fixed
