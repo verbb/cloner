@@ -8,6 +8,7 @@ use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
 use verbb\cloner\services\GlobalSets;
 use verbb\cloner\services\Sections;
+use verbb\cloner\services\Sites;
 use verbb\cloner\services\TagGroups;
 use verbb\cloner\services\UserGroups;
 use verbb\cloner\services\Volumes;
@@ -40,6 +41,7 @@ class Service extends Component
             EntryTypes::class,
             GlobalSets::class,
             Sections::class,
+            Sites::class,
             TagGroups::class,
             UserGroups::class,
             Volumes::class,

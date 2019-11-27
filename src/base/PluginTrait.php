@@ -7,6 +7,7 @@ use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
 use verbb\cloner\services\GlobalSets;
 use verbb\cloner\services\Sections;
+use verbb\cloner\services\Sites;
 use verbb\cloner\services\TagGroups;
 use verbb\cloner\services\UserGroups;
 use verbb\cloner\services\Volumes;
@@ -57,6 +58,11 @@ trait PluginTrait
         return $this->get('service');
     }
 
+    public function getSites()
+    {
+        return $this->get('sites');
+    }
+
     public function getTagGroups()
     {
         return $this->get('tagGroups');
@@ -81,6 +87,7 @@ trait PluginTrait
             'globalSets' => GlobalSets::class,
             'sections' => Sections::class,
             'service' => Service::class,
+            'sites' => Sites::class,
             'tagGroups' => TagGroups::class,
             'userGroups' => UserGroups::class,
             'volumes' => Volumes::class,

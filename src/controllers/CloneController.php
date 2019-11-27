@@ -240,4 +240,28 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
+    public function actionSite()
+    {
+        $request = Craft::$app->getRequest();
+
+        $id = $request->getParam('id');
+        $name = $request->getParam('name');
+        $handle = $request->getParam('handle');
+
+        $oldSite = Craft::$app->getSites()->getSiteById($id);
+
+        $site = Cloner::$plugin->getSites()->setupClonedSite($oldSite, $name, $handle);
+
+        if (!Craft::$app->getSites()->saveSite($site)) {
+            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone site.'));
+            Cloner::error('Couldn’t clone site - {i}.', [ 'i' => json_encode($site->getErrors()) ]);
+
+            return $this->asJson(['success' => false]);
+        }
+
+        Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Site cloned successfully.'));
+
+        return $this->asJson(['success' => true]);
+    }
+
 }
