@@ -17,11 +17,13 @@ Craft.Cloner = Garnish.Base.extend({
     action: null,
 
     init: function(settings) {
-        this.$table = $('table#' + settings.id);
-        this.title = 'New ' + settings.title + ' Name';
-        this.action = 'cloner/' + settings.action;
+        Garnish.requestAnimationFrame($.proxy(function() {
+            this.$table = $('#' + settings.id + '-vue-admin-table');
+            this.title = 'New ' + settings.title + ' Name';
+            this.action = 'cloner/' + settings.action;
 
-        this.setupTable();
+            this.setupTable();
+        }, this));
     },
 
     setupTable: function() {
@@ -40,8 +42,8 @@ Craft.Cloner = Garnish.Base.extend({
             });
 
             this.$table.find('tbody tr').each(function() {
-                var $actionElement = $(this).find('td.thin:first');
-                var $cloneButton = $('<a class="add icon"></a>');
+                var $actionElement = $(this).find('td a[role="button"]').parents('td');
+                var $cloneButton = $('<a class="add icon"></a><span class="spinner cloner-spinner hidden"></span>');
 
                 if (!$actionElement.length) {
                     var $col = $('<td class="thin"></td>').html($cloneButton);
@@ -59,9 +61,15 @@ Craft.Cloner = Garnish.Base.extend({
     onCloneButtonClick: function(e) {
         e.preventDefault();
 
+        // Vuetable doesn't give us the IDs of each row, so figure it out
         var $row = $(e.currentTarget).parents('tr');
-        var rowId = $row.data('id');
+        var href = $row.find('td:first a').attr('href');
+        var segments = href.split('/');
+        var rowId = segments[segments.length - 1];
         var name;
+
+        var $addBtn = $(e.currentTarget);
+        var $spinner = $(e.currentTarget).siblings('.spinner');
 
         if (name = prompt(this.title)) {
             var data = {
@@ -70,8 +78,18 @@ Craft.Cloner = Garnish.Base.extend({
                 handle: this.generateHandle(name),
             };
 
+            $addBtn.addClass('hidden');
+            $spinner.removeClass('hidden');
+
             Craft.postActionRequest(this.action, data, $.proxy(function(response, textStatus) {
-                window.location.reload();
+                if (response && response.success) {
+                    window.location.reload();
+                } else {
+                    Craft.cp.displayError(Craft.t('cloner', response.error));
+
+                    $addBtn.removeClass('hidden');
+                    $spinner.addClass('hidden');
+                }
             }, this));
         }
     },

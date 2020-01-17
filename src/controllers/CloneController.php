@@ -28,10 +28,11 @@ class CloneController extends Controller
         $entryType = Cloner::$plugin->getEntryTypes()->setupClonedEntryType($oldEntryType, $name, $handle);
 
         if (!Craft::$app->getSections()->saveEntryType($entryType)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone entry type.'));
-            Cloner::error('Couldn’t clone entry type - {i}.', [ 'i' => json_encode($entryType->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t clone entry type - {i}.', [ 'i' => json_encode($entryType->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
 
-            return $this->asJson(['success' => false]);
+            return $this->asErrorJson($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Entry type cloned successfully.'));
@@ -52,10 +53,11 @@ class CloneController extends Controller
         $section = Cloner::$plugin->getSections()->setupClonedSection($oldSection, $name, $handle);
 
         if (!Craft::$app->getSections()->saveSection($section)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone section.'));
-            Cloner::error('Couldn’t clone section - {i}.', [ 'i' => json_encode($section->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t clone section - {i}.', [ 'i' => json_encode($section->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
 
-            return $this->asJson(['success' => false]);
+            return $this->asErrorJson($error);
         }
 
         // Split off the default entry type
@@ -67,8 +69,11 @@ class CloneController extends Controller
         $defaultEntryType = Cloner::$plugin->getEntryTypes()->setupDefaultEntryType($oldDefaultEntryType, $newDefaultEntryType);
 
         if (!Craft::$app->getSections()->saveEntryType($defaultEntryType)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone section’s default entry type.'));
-            Cloner::error('Couldn’t clone section’s default entry type - {i}.', [ 'i' => json_encode($defaultEntryType->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t section’s default entry type - {i}.', [ 'i' => json_encode($defaultEntryType->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
+
+            return $this->asErrorJson($error);
         }
 
         foreach ($oldSection->getEntryTypes() as $key => $oldEntryType) {
@@ -84,8 +89,11 @@ class CloneController extends Controller
             $entryType->sectionId = $section->id;
 
             if (!Craft::$app->getSections()->saveEntryType($entryType)) {
-                Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone section’s entry type.'));
-                Cloner::error('Couldn’t clone section’s entry type - {i}.', [ 'i' => json_encode($entryType->getErrors()) ]);
+                $error = Craft::t('cloner', 'Couldn’t section’s entry type - {i}.', [ 'i' => json_encode($entryType->getErrors()) ]);
+                Craft::$app->getSession()->setError($error);
+                Cloner::error($error);
+
+                return $this->asErrorJson($error);
             }
         }
 
@@ -107,10 +115,11 @@ class CloneController extends Controller
         $volume = Cloner::$plugin->getVolumes()->setupClonedVolume($oldVolume, $name, $handle);
 
         if (!Craft::$app->getVolumes()->saveVolume($volume)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone volume.'));
-            Cloner::error('Couldn’t clone volume - {i}.', [ 'i' => json_encode($volume->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t clone volume - {i}.', [ 'i' => json_encode($volume->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
 
-            return $this->asJson(['success' => false]);
+            return $this->asErrorJson($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Volume cloned successfully.'));
@@ -126,15 +135,17 @@ class CloneController extends Controller
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
-        $oldTransform = Craft::$app->getAssetTransforms()->getTransformById($id);
+        // NOTE: the ID will be the handle, because that's how the URL is setup for transforms
+        $oldTransform = Craft::$app->getAssetTransforms()->getTransformByHandle($id);
 
         $transform = Cloner::$plugin->getAssetTransforms()->setupClonedTransform($oldTransform, $name, $handle);
 
         if (!Craft::$app->getAssetTransforms()->saveTransform($transform)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone transform.'));
-            Cloner::error('Couldn’t clone transform - {i}.', [ 'i' => json_encode($transform->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t clone transform - {i}.', [ 'i' => json_encode($transform->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
 
-            return $this->asJson(['success' => false]);
+            return $this->asErrorJson($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Transform cloned successfully.'));
@@ -155,10 +166,11 @@ class CloneController extends Controller
         $categoryGroup = Cloner::$plugin->getCategoryGroups()->setupClonedCategoryGroup($oldCategoryGroup, $name, $handle);
 
         if (!Craft::$app->getCategories()->saveGroup($categoryGroup)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone category group.'));
-            Cloner::error('Couldn’t clone category group - {i}.', [ 'i' => json_encode($categoryGroup->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t clone category group - {i}.', [ 'i' => json_encode($categoryGroup->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
 
-            return $this->asJson(['success' => false]);
+            return $this->asErrorJson($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Category group cloned successfully.'));
@@ -179,10 +191,11 @@ class CloneController extends Controller
         $tagGroup = Cloner::$plugin->getTagGroups()->setupClonedTagGroup($oldTagGroup, $name, $handle);
 
         if (!Craft::$app->getTags()->saveTagGroup($tagGroup)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone tag group.'));
-            Cloner::error('Couldn’t clone tag group - {i}.', [ 'i' => json_encode($tagGroup->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t clone tag group - {i}.', [ 'i' => json_encode($tagGroup->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
 
-            return $this->asJson(['success' => false]);
+            return $this->asErrorJson($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Tag group cloned successfully.'));
@@ -203,10 +216,11 @@ class CloneController extends Controller
         $globalSet = Cloner::$plugin->getGlobalSets()->setupClonedGlobalSet($oldGlobalSet, $name, $handle);
 
         if (!Craft::$app->getGlobals()->saveSet($globalSet)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone global set.'));
-            Cloner::error('Couldn’t clone global set - {i}.', [ 'i' => json_encode($globalSet->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t clone global set - {i}.', [ 'i' => json_encode($globalSet->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
 
-            return $this->asJson(['success' => false]);
+            return $this->asErrorJson($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Global set cloned successfully.'));
@@ -227,10 +241,11 @@ class CloneController extends Controller
         $userGroup = Cloner::$plugin->getUserGroups()->setupClonedUserGroup($oldUserGroup, $name, $handle);
 
         if (!Craft::$app->getUserGroups()->saveGroup($userGroup)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone user group.'));
-            Cloner::error('Couldn’t clone user group - {i}.', [ 'i' => json_encode($userGroup->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t clone user group - {i}.', [ 'i' => json_encode($userGroup->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
 
-            return $this->asJson(['success' => false]);
+            return $this->asErrorJson($error);
         }
 
         Cloner::$plugin->getUserGroups()->setupPermissions($oldUserGroup, $userGroup);
@@ -253,10 +268,11 @@ class CloneController extends Controller
         $site = Cloner::$plugin->getSites()->setupClonedSite($oldSite, $name, $handle);
 
         if (!Craft::$app->getSites()->saveSite($site)) {
-            Craft::$app->getSession()->setError(Craft::t('cloner', 'Couldn’t clone site.'));
-            Cloner::error('Couldn’t clone site - {i}.', [ 'i' => json_encode($site->getErrors()) ]);
+            $error = Craft::t('cloner', 'Couldn’t clone site - {i}.', [ 'i' => json_encode($site->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
 
-            return $this->asJson(['success' => false]);
+            return $this->asErrorJson($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Site cloned successfully.'));

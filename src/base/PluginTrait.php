@@ -17,6 +17,8 @@ use craft\log\FileTarget;
 
 use yii\log\Logger;
 
+use verbb\base\BaseHelper;
+
 trait PluginTrait
 {
     // Static Properties
@@ -78,30 +80,6 @@ trait PluginTrait
         return $this->get('volumes');
     }
 
-    private function _setPluginComponents()
-    {
-        $this->setComponents([
-            'assetTransforms' => AssetTransforms::class,
-            'categoryGroups' => CategoryGroups::class,
-            'entryTypes' => EntryTypes::class,
-            'globalSets' => GlobalSets::class,
-            'sections' => Sections::class,
-            'service' => Service::class,
-            'sites' => Sites::class,
-            'tagGroups' => TagGroups::class,
-            'userGroups' => UserGroups::class,
-            'volumes' => Volumes::class,
-        ]);
-    }
-
-    private function _setLogging()
-    {
-        Craft::getLogger()->dispatcher->targets[] = new FileTarget([
-            'logFile' => Craft::getAlias('@storage/logs/cloner.log'),
-            'categories' => ['cloner'],
-        ]);
-    }
-
     public static function log($message, $attributes = [])
     {
         if ($attributes) {
@@ -118,6 +96,36 @@ trait PluginTrait
         }
 
         Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'cloner');
+    }
+
+
+    // Private Methods
+    // =========================================================================
+
+    private function _setPluginComponents()
+    {
+        $this->setComponents([
+            'assetTransforms' => AssetTransforms::class,
+            'categoryGroups' => CategoryGroups::class,
+            'entryTypes' => EntryTypes::class,
+            'globalSets' => GlobalSets::class,
+            'sections' => Sections::class,
+            'service' => Service::class,
+            'sites' => Sites::class,
+            'tagGroups' => TagGroups::class,
+            'userGroups' => UserGroups::class,
+            'volumes' => Volumes::class,
+        ]);
+
+        BaseHelper::registerModule();
+    }
+
+    private function _setLogging()
+    {
+        Craft::getLogger()->dispatcher->targets[] = new FileTarget([
+            'logFile' => Craft::getAlias('@storage/logs/cloner.log'),
+            'categories' => ['cloner'],
+        ]);
     }
 
 }
