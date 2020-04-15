@@ -13,7 +13,6 @@ use verbb\cloner\services\UserGroups;
 use verbb\cloner\services\Volumes;
 
 use Craft;
-use craft\log\FileTarget;
 
 use yii\log\Logger;
 
@@ -122,10 +121,7 @@ trait PluginTrait
 
     private function _setLogging()
     {
-        Craft::getLogger()->dispatcher->targets[] = new FileTarget([
-            'logFile' => Craft::getAlias('@storage/logs/cloner.log'),
-            'categories' => ['cloner'],
-        ]);
+        BaseHelper::setFileLogging('cloner');
     }
 
 }
