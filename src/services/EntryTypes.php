@@ -40,9 +40,6 @@ class EntryTypes extends Service
 
         $this->cloneAttributes($oldEntryType, $entryType, [
             'sectionId',
-            'hasTitleField',
-            'titleLabel',
-            'titleFormat',
         ]);
 
         $fieldLayoutInfo = $this->getFieldLayout($oldEntryType->getFieldLayout());
