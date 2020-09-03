@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0 - 2020-09-03
+
+### Changed
+- Now requires Craft 3.5+.
+
+### Fixed
+- Fix error when cloning an entry type in Craft 3.5+.
+
 ## 1.1.2 - 2020-04-16
 
 ### Fixed
