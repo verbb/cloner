@@ -56,7 +56,6 @@ class EntryTypes extends Service
     {
         $this->cloneAttributes($oldEntryType, $entryType, [
             'hasTitleField',
-            'titleLabel',
             'titleFormat',
         ]);
 

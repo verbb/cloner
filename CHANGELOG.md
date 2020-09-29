@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1 - 2020-09-29
+
+### Fixed
+- Fix error when cloning an entry type.
+
 ## 1.2.0 - 2020-09-03
 
 ### Changed
