@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2 - 2020-11-19
+
+### Fixed
+- Fix not cloning UI elements for all element types.
+
 ## 1.2.1 - 2020-09-29
 
 ### Fixed
