@@ -15,6 +15,8 @@ use verbb\cloner\services\Volumes;
 
 use Craft;
 use craft\base\Component;
+use craft\models\FieldLayout;
+use craft\models\FieldLayoutTab;
 
 class Service extends Component
 {
@@ -73,22 +75,21 @@ class Service extends Component
 
     public function getFieldLayout($oldFieldLayout)
     {
-        $fields = [];
-        $required = [];
+        $layout = new FieldLayout();
+        $layout->type = $oldFieldLayout->type;
+        $tabs = [];
 
-        foreach ($oldFieldLayout->getTabs() as $tab) {
-            $fields[$tab->name] = [];
+        foreach ($oldFieldLayout->getTabs() as $oldTab) {
+            $tab = new FieldLayoutTab();
+            $tab->name = $oldTab->name;
+            $tab->elements = $oldTab->elements;
 
-            foreach ($tab->getFields() as $field) {
-                $fields[$tab->name][] = $field->id;
-
-                if ($field->required) {
-                    $required[] = $field->id;
-                }
-            }
+            $tabs[] = $tab;
         }
 
-        return [$fields, $required];
+        $layout->setTabs($tabs);
+
+        return $layout;
     }
 
 

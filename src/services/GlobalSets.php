@@ -27,11 +27,8 @@ class GlobalSets extends Service
         $globalSet->name = $name;
         $globalSet->handle = $handle;
 
-        $fieldLayoutInfo = $this->getFieldLayout($oldGlobalSet->getFieldLayout());
-
         // Set the field layout
-        $fieldLayout = Craft::$app->getFields()->assembleLayout($fieldLayoutInfo[0], $fieldLayoutInfo[1]);
-        $fieldLayout->type = GlobalSet::class;
+        $fieldLayout = $this->getFieldLayout($oldGlobalSet->getFieldLayout());
         $globalSet->setFieldLayout($fieldLayout);
 
         return $globalSet;

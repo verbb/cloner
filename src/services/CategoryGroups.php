@@ -54,11 +54,8 @@ class CategoryGroups extends Service
 
         $categoryGroup->setSiteSettings($allSiteSettings);
 
-        $fieldLayoutInfo = $this->getFieldLayout($oldCategoryGroup->getFieldLayout());
-
         // Set the field layout
-        $fieldLayout = Craft::$app->getFields()->assembleLayout($fieldLayoutInfo[0], $fieldLayoutInfo[1]);
-        $fieldLayout->type = Category::class;
+        $fieldLayout = $this->getFieldLayout($oldCategoryGroup->getFieldLayout());
         $categoryGroup->setFieldLayout($fieldLayout);
 
         return $categoryGroup;

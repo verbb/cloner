@@ -42,11 +42,8 @@ class EntryTypes extends Service
             'sectionId',
         ]);
 
-        $fieldLayoutInfo = $this->getFieldLayout($oldEntryType->getFieldLayout());
-
         // Set the field layout
-        $fieldLayout = Craft::$app->getFields()->assembleLayout($fieldLayoutInfo[0], $fieldLayoutInfo[1]);
-        $fieldLayout->type = Entry::class;
+        $fieldLayout = $this->getFieldLayout($oldEntryType->getFieldLayout());
         $entryType->setFieldLayout($fieldLayout);
 
         return $entryType;
@@ -59,11 +56,8 @@ class EntryTypes extends Service
             'titleFormat',
         ]);
 
-        $fieldLayoutInfo = $this->getFieldLayout($oldEntryType->getFieldLayout());
-
         // Set the field layout
-        $fieldLayout = Craft::$app->getFields()->assembleLayout($fieldLayoutInfo[0], $fieldLayoutInfo[1]);
-        $fieldLayout->type = Entry::class;
+        $fieldLayout = $this->getFieldLayout($oldEntryType->getFieldLayout());
         $entryType->setFieldLayout($fieldLayout);
 
         return $entryType;

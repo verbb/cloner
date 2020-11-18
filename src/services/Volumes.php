@@ -35,11 +35,8 @@ class Volumes extends Service
             'settings' => $oldVolume->settings,
         ]);
 
-        $fieldLayoutInfo = $this->getFieldLayout($oldVolume->getFieldLayout());
-
         // Set the field layout
-        $fieldLayout = Craft::$app->getFields()->assembleLayout($fieldLayoutInfo[0], $fieldLayoutInfo[1]);
-        $fieldLayout->type = Asset::class;
+        $fieldLayout = $this->getFieldLayout($oldVolume->getFieldLayout());
         $volume->setFieldLayout($fieldLayout);
 
         return $volume;

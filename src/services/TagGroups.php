@@ -28,11 +28,8 @@ class TagGroups extends Service
         $tagGroup->name = $name;
         $tagGroup->handle = $handle;
 
-        $fieldLayoutInfo = $this->getFieldLayout($oldTagGroup->getFieldLayout());
-
         // Set the field layout
-        $fieldLayout = Craft::$app->getFields()->assembleLayout($fieldLayoutInfo[0], $fieldLayoutInfo[1]);
-        $fieldLayout->type = Tag::class;
+        $fieldLayout = $this->getFieldLayout($oldTagGroup->getFieldLayout());
         $tagGroup->setFieldLayout($fieldLayout);
 
         return $tagGroup;
