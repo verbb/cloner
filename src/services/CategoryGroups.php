@@ -15,16 +15,16 @@ class CategoryGroups extends Service
     // Properties
     // =========================================================================
 
-    public static $matchedRoute = 'categories/group-index';
-    public static $id = 'categorygroups';
-    public static $title = 'Category Group';
-    public static $action = 'clone/category-group';
+    public static string $matchedRoute = 'categories/group-index';
+    public static string $id = 'categorygroups';
+    public static string $title = 'Category Group';
+    public static string $action = 'clone/category-group';
 
 
     // Public Methods
     // =========================================================================
 
-    public function setupClonedCategoryGroup($oldCategoryGroup, $name, $handle)
+    public function setupClonedCategoryGroup($oldCategoryGroup, $name, $handle): CategoryGroup
     {
         $categoryGroup = new CategoryGroup();
         $categoryGroup->name = $name;
@@ -32,6 +32,7 @@ class CategoryGroups extends Service
 
         $this->cloneAttributes($oldCategoryGroup, $categoryGroup, [
             'maxLevels',
+            'defaultPlacement',
         ]);
 
         $allSiteSettings = [];

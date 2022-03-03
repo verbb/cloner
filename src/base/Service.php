@@ -6,6 +6,7 @@ use verbb\cloner\events\RegisterClonerGroupEvent;
 use verbb\cloner\services\AssetTransforms;
 use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
+use verbb\cloner\services\Filesystems;
 use verbb\cloner\services\GlobalSets;
 use verbb\cloner\services\Sections;
 use verbb\cloner\services\Sites;
@@ -29,18 +30,15 @@ class Service extends Component
     // Public Methods
     // =========================================================================
 
-    public function init()
-    {
-        parent::init();
-    }
-
-    public function getRegisteredGroups()
+    public function getRegisteredGroups(): array
     {
         $groups = [];
+
         $registeredClasses = [
             AssetTransforms::class,
             CategoryGroups::class,
             EntryTypes::class,
+            Filesystems::class,
             GlobalSets::class,
             Sections::class,
             Sites::class,
@@ -66,30 +64,16 @@ class Service extends Component
         return $event->groups;
     }
 
-    public function cloneAttributes($oldModel, $newModel, $attributes)
+    public function cloneAttributes($oldModel, $newModel, $attributes): void
     {
         foreach ($attributes as $attr) {
             $newModel->$attr = $oldModel->$attr;
         }
     }
 
-    public function getFieldLayout($oldFieldLayout)
+    public function getFieldLayout($oldFieldLayout): FieldLayout
     {
-        $layout = new FieldLayout();
-        $layout->type = $oldFieldLayout->type;
-        $tabs = [];
-
-        foreach ($oldFieldLayout->getTabs() as $oldTab) {
-            $tab = new FieldLayoutTab();
-            $tab->name = $oldTab->name;
-            $tab->elements = $oldTab->elements;
-
-            $tabs[] = $tab;
-        }
-
-        $layout->setTabs($tabs);
-
-        return $layout;
+        return FieldLayout::createFromConfig($oldFieldLayout->getConfig());
     }
 
 

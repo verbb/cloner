@@ -5,6 +5,7 @@ use verbb\cloner\assetbundles\ClonerAsset;
 use verbb\cloner\base\PluginTrait;
 
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\helpers\Json;
 use craft\web\View;
@@ -16,7 +17,7 @@ class Cloner extends Plugin
     // Public Properties
     // =========================================================================
 
-    public $schemaVersion = '1.0.0';
+    public string $schemaVersion = '1.0.0';
 
 
     // Traits
@@ -28,7 +29,7 @@ class Cloner extends Plugin
     // Public Methods
     // =========================================================================
 
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -42,7 +43,7 @@ class Cloner extends Plugin
     // Private Methods
     // =========================================================================
 
-    private function _registerResources()
+    private function _registerResources(): void
     {
         Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
             $request = Craft::$app->getRequest();
@@ -56,7 +57,7 @@ class Cloner extends Plugin
                 if ($route === 'templates/render') {
                     $route = $request->pathInfo;
                 }
-
+                
                 // Find the matching rule-set in our settings, otherwise don't proceed
                 if (!isset($registeredGroups[$route])) {
                     return;

@@ -8,5 +8,5 @@ class RegisterClonerGroupEvent extends Event
     // Properties
     // =========================================================================
 
-    public $groups = [];
+    public array $groups = [];
 }

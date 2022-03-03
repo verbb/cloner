@@ -10,12 +10,14 @@ use craft\models\EntryType;
 use craft\models\Section;
 use craft\web\Controller;
 
+use yii\web\Response;
+
 class CloneController extends Controller
 {
     // Public Methods
     // =========================================================================
 
-    public function actionEntryType()
+    public function actionEntryType(): Response
     {
         $request = Craft::$app->getRequest();
 
@@ -40,7 +42,7 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
-    public function actionSection()
+    public function actionSection(): Response
     {
         $request = Craft::$app->getRequest();
 
@@ -102,7 +104,7 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
-    public function actionVolume()
+    public function actionVolume(): Response
     {
         $request = Craft::$app->getRequest();
 
@@ -127,7 +129,7 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
-    public function actionTransform()
+    public function actionTransform(): Response
     {
         $request = Craft::$app->getRequest();
 
@@ -153,7 +155,7 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
-    public function actionCategoryGroup()
+    public function actionCategoryGroup(): Response
     {
         $request = Craft::$app->getRequest();
 
@@ -178,7 +180,7 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
-    public function actionTagGroup()
+    public function actionTagGroup(): Response
     {
         $request = Craft::$app->getRequest();
 
@@ -203,7 +205,7 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
-    public function actionGlobalSet()
+    public function actionGlobalSet(): Response
     {
         $request = Craft::$app->getRequest();
 
@@ -228,7 +230,7 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
-    public function actionUserGroup()
+    public function actionUserGroup(): Response
     {
         $request = Craft::$app->getRequest();
 
@@ -255,7 +257,7 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
-    public function actionSite()
+    public function actionSite(): Response
     {
         $request = Craft::$app->getRequest();
 
@@ -276,6 +278,31 @@ class CloneController extends Controller
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Site cloned successfully.'));
+
+        return $this->asJson(['success' => true]);
+    }
+
+    public function actionFilesystem(): Response
+    {
+        $request = Craft::$app->getRequest();
+
+        $id = $request->getParam('id');
+        $name = $request->getParam('name');
+        $handle = $request->getParam('handle');
+
+        $oldFilesystem = Craft::$app->getFs()->getFilesystemByHandle($id);
+
+        $filesystem = Cloner::$plugin->getFilesystems()->setupClonedFilesystem($oldFilesystem, $name, $handle);
+
+        if (!Craft::$app->getFs()->saveFilesystem($filesystem)) {
+            $error = Craft::t('cloner', 'Couldn’t clone filesystem - {i}.', [ 'i' => json_encode($filesystem->getErrors()) ]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
+
+            return $this->asErrorJson($error);
+        }
+
+        Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Filesystem cloned successfully.'));
 
         return $this->asJson(['success' => true]);
     }

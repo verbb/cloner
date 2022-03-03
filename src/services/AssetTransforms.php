@@ -13,16 +13,16 @@ class AssetTransforms extends Service
     // Properties
     // =========================================================================
 
-    public static $matchedRoute = 'asset-transforms/transform-index';
-    public static $id = 'transforms';
-    public static $title = 'Asset Transform';
-    public static $action = 'clone/transform';
+    public static string $matchedRoute = 'asset-transforms/transform-index';
+    public static string $id = 'transforms';
+    public static string $title = 'Asset Transform';
+    public static string $action = 'clone/transform';
 
 
     // Public Methods
     // =========================================================================
 
-    public function setupClonedTransform($oldTransform, $name, $handle)
+    public function setupClonedTransform($oldTransform, $name, $handle): AssetTransform
     {
         $transform = new AssetTransform();
         $transform->name = $name;

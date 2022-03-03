@@ -15,24 +15,21 @@ class Volumes extends Service
     // Properties
     // =========================================================================
 
-    public static $matchedRoute = 'volumes/volume-index';
-    public static $id = 'volumes';
-    public static $title = 'Volume';
-    public static $action = 'clone/volume';
+    public static string $matchedRoute = 'volumes/volume-index';
+    public static string $id = 'volumes';
+    public static string $title = 'Volume';
+    public static string $action = 'clone/volume';
 
 
     // Public Methods
     // =========================================================================
 
-    public function setupClonedVolume($oldVolume, $name, $handle)
+    public function setupClonedVolume($oldVolume, $name, $handle): Volume
     {
-        $volume = Craft::$app->getVolumes()->createVolume([
-            'type' => get_class($oldVolume),
+        $volume = new Volume([
             'name' => $name,
             'handle' => $handle,
-            'hasUrls' => $oldVolume->hasUrls,
-            'url' => $oldVolume->url,
-            'settings' => $oldVolume->settings,
+            'fsHandle' => $oldVolume->fsHandle,
         ]);
 
         // Set the field layout

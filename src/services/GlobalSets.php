@@ -12,16 +12,16 @@ class GlobalSets extends Service
     // Properties
     // =========================================================================
 
-    public static $matchedRoute = 'settings/globals';
-    public static $id = 'sets';
-    public static $title = 'Global Set';
-    public static $action = 'clone/global-set';
+    public static string $matchedRoute = 'settings/globals';
+    public static string $id = 'sets';
+    public static string $title = 'Global Set';
+    public static string $action = 'clone/global-set';
 
 
     // Public Methods
     // =========================================================================
 
-    public function setupClonedGlobalSet($oldGlobalSet, $name, $handle)
+    public function setupClonedGlobalSet($oldGlobalSet, $name, $handle): GlobalSet
     {
         $globalSet = new GlobalSet();
         $globalSet->name = $name;

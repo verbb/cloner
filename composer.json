@@ -2,7 +2,7 @@
     "name": "verbb/cloner",
     "description": "Easily clone sections, entry types, category/tag/user groups, volumes, asset transforms and more.",
     "type": "craft-plugin",
-    "version": "1.2.2",
+    "version": "2.0.0-beta.1",
     "keywords": [
         "craft",
         "cms",
@@ -26,8 +26,9 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.5.0",
-        "verbb/base": "^1.0.2"
+        "php": "^8.0.2",
+        "craftcms/cms": "^4.0.0-alpha",
+        "verbb/base": "^2.0.0-beta"
     },
     "autoload": {
         "psr-4": {
@@ -37,7 +38,7 @@
     "extra": {
         "name": "Cloner",
         "handle": "cloner",
-        "changelogUrl": "https://raw.githubusercontent.com/verbb/cloner/craft-3/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/cloner/craft-4/CHANGELOG.md",
         "class": "verbb\\cloner\\Cloner"
     }
 }

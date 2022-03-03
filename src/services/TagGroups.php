@@ -13,16 +13,16 @@ class TagGroups extends Service
     // Properties
     // =========================================================================
 
-    public static $matchedRoute = 'tags/index';
-    public static $id = 'taggroups';
-    public static $title = 'Tag Group';
-    public static $action = 'clone/tag-group';
+    public static string $matchedRoute = 'tags/index';
+    public static string $id = 'taggroups';
+    public static string $title = 'Tag Group';
+    public static string $action = 'clone/tag-group';
 
 
     // Public Methods
     // =========================================================================
 
-    public function setupClonedTagGroup($oldTagGroup, $name, $handle)
+    public function setupClonedTagGroup($oldTagGroup, $name, $handle): TagGroup
     {
         $tagGroup = new TagGroup();
         $tagGroup->name = $name;

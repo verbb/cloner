@@ -5,6 +5,7 @@ use verbb\cloner\Cloner;
 use verbb\cloner\services\AssetTransforms;
 use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
+use verbb\cloner\services\Filesystems;
 use verbb\cloner\services\GlobalSets;
 use verbb\cloner\services\Sections;
 use verbb\cloner\services\Sites;
@@ -23,63 +24,68 @@ trait PluginTrait
     // Static Properties
     // =========================================================================
 
-    public static $plugin;
+    public static Cloner $plugin;
 
 
     // Public Methods
     // =========================================================================
 
-    public function getAssetTransforms()
+    public function getAssetTransforms(): AssetTransforms
     {
         return $this->get('assetTransforms');
     }
 
-    public function getCategoryGroups()
+    public function getCategoryGroups(): CategoryGroups
     {
         return $this->get('categoryGroups');
     }
 
-    public function getEntryTypes()
+    public function getEntryTypes(): EntryTypes
     {
         return $this->get('entryTypes');
     }
 
-    public function getGlobalSets()
+    public function getFilesystems(): Filesystems
+    {
+        return $this->get('filesystems');
+    }
+
+    public function getGlobalSets(): GlobalSets
     {
         return $this->get('globalSets');
     }
 
-    public function getSections()
+    public function getSections(): Sections
     {
         return $this->get('sections');
     }
 
-    public function getService()
+    public function getService(): Service
     {
         return $this->get('service');
     }
 
-    public function getSites()
+    public function getSites(): Sites
     {
         return $this->get('sites');
     }
 
-    public function getTagGroups()
+    public function getTagGroups(): TagGroups
     {
         return $this->get('tagGroups');
     }
 
-    public function getUserGroups()
+    public function getUserGroups(): UserGroups
     {
         return $this->get('userGroups');
     }
 
-    public function getVolumes()
+    public function getVolumes(): Volumes
     {
         return $this->get('volumes');
     }
 
-    public static function log($message, $attributes = [])
+    public static function log($message, $attributes = []): void
     {
         if ($attributes) {
             $message = Craft::t('cloner', $message, $attributes);
@@ -88,7 +94,7 @@ trait PluginTrait
         Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'cloner');
     }
 
-    public static function error($message, $attributes = [])
+    public static function error($message, $attributes = []): void
     {
         if ($attributes) {
             $message = Craft::t('cloner', $message, $attributes);
@@ -101,12 +107,13 @@ trait PluginTrait
     // Private Methods
     // =========================================================================
 
-    private function _setPluginComponents()
+    private function _setPluginComponents(): void
     {
         $this->setComponents([
             'assetTransforms' => AssetTransforms::class,
             'categoryGroups' => CategoryGroups::class,
             'entryTypes' => EntryTypes::class,
+            'filesystems' => Filesystems::class,
             'globalSets' => GlobalSets::class,
             'sections' => Sections::class,
             'service' => Service::class,
@@ -119,7 +126,7 @@ trait PluginTrait
         BaseHelper::registerModule();
     }
 
-    private function _setLogging()
+    private function _setLogging(): void
     {
         BaseHelper::setFileLogging('cloner');
     }

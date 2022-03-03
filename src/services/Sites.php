@@ -13,16 +13,16 @@ class Sites extends Service
     // Properties
     // =========================================================================
 
-    public static $matchedRoute = 'sites/settings-index';
-    public static $id = 'sites';
-    public static $title = 'site';
-    public static $action = 'clone/site';
+    public static string $matchedRoute = 'sites/settings-index';
+    public static string $id = 'sites';
+    public static string $title = 'site';
+    public static string $action = 'clone/site';
 
 
     // Public Methods
     // =========================================================================
 
-    public function setupClonedSite($oldSite, $name, $handle)
+    public function setupClonedSite($oldSite, string $name, $handle): Site
     {
         $site = new Site();
         $site->name = $name;

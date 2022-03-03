@@ -23,16 +23,16 @@ class EntryTypes extends Service
     // `title` => the title-case thing we're cloning (shown in the prompt window)
     // `action` => the Cloner plugin controller action (without the prefix for the plugin).
     //
-    public static $matchedRoute = 'sections/entry-types-index';
-    public static $id = 'entrytypes';
-    public static $title = 'Entry Type';
-    public static $action = 'clone/entry-type';
+    public static string $matchedRoute = 'sections/entry-types-index';
+    public static string $id = 'entrytypes';
+    public static string $title = 'Entry Type';
+    public static string $action = 'clone/entry-type';
 
 
     // Public Methods
     // =========================================================================
 
-    public function setupClonedEntryType($oldEntryType, $newEntryName, $newEntryHandle)
+    public function setupClonedEntryType($oldEntryType, $newEntryName, $newEntryHandle): EntryType
     {
         $entryType = new EntryType();
         $entryType->name = $newEntryName;
@@ -49,7 +49,7 @@ class EntryTypes extends Service
         return $entryType;
     }
 
-    public function setupDefaultEntryType($oldEntryType, $entryType)
+    public function setupDefaultEntryType($oldEntryType, $entryType): EntryType
     {
         $this->cloneAttributes($oldEntryType, $entryType, [
             'hasTitleField',

@@ -17,16 +17,16 @@ class Sections extends Service
     // Properties
     // =========================================================================
 
-    public static $matchedRoute = 'sections/index';
-    public static $id = 'sections';
-    public static $title = 'Section';
-    public static $action = 'clone/section';
+    public static string $matchedRoute = 'sections/index';
+    public static string $id = 'sections';
+    public static string $title = 'Section';
+    public static string $action = 'clone/section';
 
 
     // Public Methods
     // =========================================================================
 
-    public function setupClonedSection($oldSection, $newSectionName, $newSectionHandle)
+    public function setupClonedSection($oldSection, $newSectionName, $newSectionHandle): Section
     {
         $section = new Section();
         $section->name = $newSectionName;
@@ -35,7 +35,7 @@ class Sections extends Service
         $this->cloneAttributes($oldSection, $section, [
             'type',
             'enableVersioning',
-            'propagateEntries',
+            'propagationMethod',
             'maxLevels',
         ]);
 
