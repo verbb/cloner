@@ -11,10 +11,10 @@ class Filesystems extends Service
     // Properties
     // =========================================================================
 
-    public static string $matchedRoute = 'fs/index';
-    public static string $id = 'fs';
-    public static string $title = 'Filesystem';
     public static string $action = 'clone/filesystem';
+    public static string $id = 'fs';
+    public static string $matchedRoute = 'fs/index';
+    public static string $title = 'Filesystem';
 
 
     // Public Methods

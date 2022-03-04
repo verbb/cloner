@@ -10,10 +10,10 @@ class Sites extends Service
     // Properties
     // =========================================================================
 
-    public static string $matchedRoute = 'sites/settings-index';
-    public static string $id = 'sites';
-    public static string $title = 'site';
     public static string $action = 'clone/site';
+    public static string $id = 'sites';
+    public static string $matchedRoute = 'sites/settings-index';
+    public static string $title = 'site';
 
 
     // Public Methods

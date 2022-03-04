@@ -11,10 +11,10 @@ class UserGroups extends Service
     // Properties
     // =========================================================================
 
-    public static string $matchedRoute = 'settings/users';
-    public static string $id = 'groups';
-    public static string $title = 'User Group';
     public static string $action = 'clone/user-group';
+    public static string $id = 'groups';
+    public static string $matchedRoute = 'settings/users';
+    public static string $title = 'User Group';
 
 
     // Public Methods
@@ -34,7 +34,7 @@ class UserGroups extends Service
     }
 
     public function setupPermissions($oldUserGroup, $userGroup): void
-    {   
+    {
         $permissions = Craft::$app->getUserPermissions()->getPermissionsByGroupId($oldUserGroup->id);
 
         Craft::$app->getUserPermissions()->saveGroupPermissions($userGroup->id, $permissions);

@@ -10,10 +10,10 @@ class GlobalSets extends Service
     // Properties
     // =========================================================================
 
-    public static string $matchedRoute = 'settings/globals';
-    public static string $id = 'sets';
-    public static string $title = 'Global Set';
     public static string $action = 'clone/global-set';
+    public static string $id = 'sets';
+    public static string $matchedRoute = 'settings/globals';
+    public static string $title = 'Global Set';
 
 
     // Public Methods

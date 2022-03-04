@@ -10,10 +10,10 @@ class TagGroups extends Service
     // Properties
     // =========================================================================
 
-    public static string $matchedRoute = 'tags/index';
-    public static string $id = 'taggroups';
-    public static string $title = 'Tag Group';
     public static string $action = 'clone/tag-group';
+    public static string $id = 'taggroups';
+    public static string $matchedRoute = 'tags/index';
+    public static string $title = 'Tag Group';
 
 
     // Public Methods

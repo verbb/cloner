@@ -10,10 +10,10 @@ class AssetTransforms extends Service
     // Properties
     // =========================================================================
 
-    public static string $matchedRoute = 'asset-transforms/transform-index';
-    public static string $id = 'transforms';
-    public static string $title = 'Asset Transform';
     public static string $action = 'clone/transform';
+    public static string $id = 'transforms';
+    public static string $matchedRoute = 'asset-transforms/transform-index';
+    public static string $title = 'Asset Transform';
 
 
     // Public Methods

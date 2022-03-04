@@ -10,10 +10,10 @@ class Volumes extends Service
     // Properties
     // =========================================================================
 
-    public static string $matchedRoute = 'volumes/volume-index';
-    public static string $id = 'volumes';
-    public static string $title = 'Volume';
     public static string $action = 'clone/volume';
+    public static string $id = 'volumes';
+    public static string $matchedRoute = 'volumes/volume-index';
+    public static string $title = 'Volume';
 
 
     // Public Methods

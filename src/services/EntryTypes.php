@@ -17,10 +17,10 @@ class EntryTypes extends Service
     // `title` => the title-case thing we're cloning (shown in the prompt window)
     // `action` => the Cloner plugin controller action (without the prefix for the plugin).
     //
-    public static string $matchedRoute = 'sections/entry-types-index';
-    public static string $id = 'entrytypes';
-    public static string $title = 'Entry Type';
     public static string $action = 'clone/entry-type';
+    public static string $id = 'entrytypes';
+    public static string $matchedRoute = 'sections/entry-types-index';
+    public static string $title = 'Entry Type';
 
 
     // Public Methods

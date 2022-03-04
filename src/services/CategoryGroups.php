@@ -12,10 +12,10 @@ class CategoryGroups extends Service
     // Properties
     // =========================================================================
 
-    public static string $matchedRoute = 'categories/group-index';
-    public static string $id = 'categorygroups';
-    public static string $title = 'Category Group';
     public static string $action = 'clone/category-group';
+    public static string $id = 'categorygroups';
+    public static string $matchedRoute = 'categories/group-index';
+    public static string $title = 'Category Group';
 
 
     // Public Methods

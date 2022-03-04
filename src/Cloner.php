@@ -56,7 +56,7 @@ class Cloner extends Plugin
                 if ($route === 'templates/render') {
                     $route = $request->pathInfo;
                 }
-                
+
                 // Find the matching rule-set in our settings, otherwise don't proceed
                 if (!isset($registeredGroups[$route])) {
                     return;
@@ -68,7 +68,7 @@ class Cloner extends Plugin
                 // Render our JS + CSS using the provided rule-set as per the matched route
                 $view->registerJs('new Craft.Cloner(' .
                     Json::encode($registeredGroups[$route], JSON_UNESCAPED_UNICODE) .
-                ');');
+                    ');');
             }
         });
     }

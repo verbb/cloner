@@ -27,6 +27,28 @@ trait PluginTrait
     public static Cloner $plugin;
 
 
+    // Static Methods
+    // =========================================================================
+
+    public static function error($message, $attributes = []): void
+    {
+        if ($attributes) {
+            $message = Craft::t('cloner', $message, $attributes);
+        }
+
+        Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'cloner');
+    }
+
+    public static function log($message, $attributes = []): void
+    {
+        if ($attributes) {
+            $message = Craft::t('cloner', $message, $attributes);
+        }
+
+        Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'cloner');
+    }
+
+
     // Public Methods
     // =========================================================================
 
@@ -83,24 +105,6 @@ trait PluginTrait
     public function getVolumes(): Volumes
     {
         return $this->get('volumes');
-    }
-
-    public static function log($message, $attributes = []): void
-    {
-        if ($attributes) {
-            $message = Craft::t('cloner', $message, $attributes);
-        }
-
-        Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'cloner');
-    }
-
-    public static function error($message, $attributes = []): void
-    {
-        if ($attributes) {
-            $message = Craft::t('cloner', $message, $attributes);
-        }
-
-        Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'cloner');
     }
 
 

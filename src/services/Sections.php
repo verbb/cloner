@@ -13,10 +13,10 @@ class Sections extends Service
     // Properties
     // =========================================================================
 
-    public static string $matchedRoute = 'sections/index';
-    public static string $id = 'sections';
-    public static string $title = 'Section';
     public static string $action = 'clone/section';
+    public static string $id = 'sections';
+    public static string $matchedRoute = 'sections/index';
+    public static string $title = 'Section';
 
 
     // Public Methods
