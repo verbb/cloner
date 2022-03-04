@@ -4,11 +4,8 @@ namespace verbb\cloner\controllers;
 use verbb\cloner\Cloner;
 
 use Craft;
-use craft\element\Entry;
+use craft\elements\Entry;
 use craft\helpers\Json;
-use craft\helpers\StringHelper;
-use craft\models\EntryType;
-use craft\models\Section;
 use craft\web\Controller;
 
 use yii\web\Response;
@@ -138,12 +135,12 @@ class CloneController extends Controller
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
-        // NOTE: the ID will be the handle, because that's how the URL is setup for transforms
-        $oldTransform = Craft::$app->getAssetTransforms()->getTransformByHandle($id);
+        // NOTE: the ID will be the handle, because that's how the URL is set up for transforms
+        $oldTransform = Craft::$app->getImageTransforms()->getTransformByHandle($id);
 
-        $transform = Cloner::$plugin->getAssetTransforms()->setupClonedTransform($oldTransform, $name, $handle);
+        $transform = Cloner::$plugin->getImageTransforms()->setupClonedTransform($oldTransform, $name, $handle);
 
-        if (!Craft::$app->getAssetTransforms()->saveTransform($transform)) {
+        if (!Craft::$app->getImageTransforms()->saveTransform($transform)) {
             $error = Craft::t('cloner', 'Couldn’t clone transform - {i}.', [ 'i' => Json::encode($transform->getErrors()) ]);
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);

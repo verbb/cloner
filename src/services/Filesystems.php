@@ -1,13 +1,10 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
 use Craft;
-use craft\elements\Asset;
-use craft\helpers\StringHelper;
-use craft\models\AssetTransform;
+use craft\base\FsInterface;
 
 class Filesystems extends Service
 {
@@ -23,7 +20,7 @@ class Filesystems extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedFilesystem($oldFilesystem, $name, $handle)
+    public function setupClonedFilesystem($oldFilesystem, $name, $handle): FsInterface
     {
         return Craft::$app->getFs()->createFilesystem([
             'type' => $oldFilesystem::class,

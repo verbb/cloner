@@ -1,12 +1,9 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
-use craft\elements\Asset;
-use craft\models\AssetTransform;
+use craft\models\ImageTransform;
 
 class AssetTransforms extends Service
 {
@@ -22,9 +19,9 @@ class AssetTransforms extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedTransform($oldTransform, $name, $handle): AssetTransform
+    public function setupClonedTransform($oldTransform, $name, $handle): ImageTransform
     {
-        $transform = new AssetTransform();
+        $transform = new ImageTransform();
         $transform->name = $name;
         $transform->handle = $handle;
 
