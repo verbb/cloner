@@ -1,11 +1,9 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
 use Craft;
-use craft\elements\User;
 use craft\models\UserGroup;
 
 class UserGroups extends Service

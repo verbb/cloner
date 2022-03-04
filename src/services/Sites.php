@@ -1,11 +1,8 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
-use craft\helpers\StringHelper;
 use craft\models\Site;
 
 class Sites extends Service

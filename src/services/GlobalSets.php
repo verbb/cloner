@@ -1,10 +1,8 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
 use craft\elements\GlobalSet;
 
 class GlobalSets extends Service

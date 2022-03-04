@@ -1,7 +1,6 @@
 <?php
 namespace verbb\cloner\base;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\events\RegisterClonerGroupEvent;
 use verbb\cloner\services\AssetTransforms;
 use verbb\cloner\services\CategoryGroups;
@@ -14,10 +13,8 @@ use verbb\cloner\services\TagGroups;
 use verbb\cloner\services\UserGroups;
 use verbb\cloner\services\Volumes;
 
-use Craft;
 use craft\base\Component;
 use craft\models\FieldLayout;
-use craft\models\FieldLayoutTab;
 
 class Service extends Component
 {

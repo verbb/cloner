@@ -1,13 +1,8 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
-use craft\elements\Asset;
-use craft\helpers\StringHelper;
-use craft\models\AssetTransform;
 use craft\models\Volume;
 
 class Volumes extends Service

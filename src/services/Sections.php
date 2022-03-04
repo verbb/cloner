@@ -1,14 +1,10 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
-use craft\base\Component;
-use craft\element\Entry;
+use craft\elements\Entry;
 use craft\helpers\StringHelper;
-use craft\models\EntryType;
 use craft\models\Section;
 use craft\models\Section_SiteSettings;
 

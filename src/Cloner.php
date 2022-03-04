@@ -5,7 +5,6 @@ use verbb\cloner\assetbundles\ClonerAsset;
 use verbb\cloner\base\PluginTrait;
 
 use Craft;
-use craft\base\Model;
 use craft\base\Plugin;
 use craft\helpers\Json;
 use craft\web\View;
