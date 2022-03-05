@@ -2,7 +2,7 @@
 namespace verbb\cloner\base;
 
 use verbb\cloner\Cloner;
-use verbb\cloner\services\AssetTransforms;
+use verbb\cloner\services\ImageTransforms;
 use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
 use verbb\cloner\services\Filesystems;
@@ -52,9 +52,9 @@ trait PluginTrait
     // Public Methods
     // =========================================================================
 
-    public function getAssetTransforms(): AssetTransforms
+    public function getImageTransforms(): ImageTransforms
     {
-        return $this->get('assetTransforms');
+        return $this->get('imageTransforms');
     }
 
     public function getCategoryGroups(): CategoryGroups
@@ -114,7 +114,7 @@ trait PluginTrait
     private function _setPluginComponents(): void
     {
         $this->setComponents([
-            'assetTransforms' => AssetTransforms::class,
+            'imageTransforms' => ImageTransforms::class,
             'categoryGroups' => CategoryGroups::class,
             'entryTypes' => EntryTypes::class,
             'filesystems' => Filesystems::class,

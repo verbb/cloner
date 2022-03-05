@@ -2,7 +2,7 @@
 namespace verbb\cloner\base;
 
 use verbb\cloner\events\RegisterClonerGroupEvent;
-use verbb\cloner\services\AssetTransforms;
+use verbb\cloner\services\ImageTransforms;
 use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
 use verbb\cloner\services\Filesystems;
@@ -32,7 +32,7 @@ class Service extends Component
         $groups = [];
 
         $registeredClasses = [
-            AssetTransforms::class,
+            ImageTransforms::class,
             CategoryGroups::class,
             EntryTypes::class,
             Filesystems::class,
