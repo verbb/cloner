@@ -88,14 +88,6 @@
       "rFN" : 0,
       "uCM" : 0
     },
-    "\/rector.php" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 2,
-      "oAP" : "\/rector.php",
-      "oF" : 0
-    },
     "\/src\/assetbundles" : {
       "ft" : 65536,
       "oA" : 1,
