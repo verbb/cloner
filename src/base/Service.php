@@ -21,7 +21,7 @@ class Service extends Component
     // Constants
     // =========================================================================
 
-    const EVENT_REGISTER_CLONER_GROUPS = 'registerClonerGroups';
+    public const EVENT_REGISTER_CLONER_GROUPS = 'registerClonerGroups';
 
 
     // Public Methods
