@@ -32,7 +32,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Entry type cloned successfully.'));
@@ -57,7 +57,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         // Split off the default entry type
@@ -73,7 +73,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         foreach ($oldSection->getEntryTypes() as $key => $oldEntryType) {
@@ -93,7 +93,7 @@ class CloneController extends Controller
                 Craft::$app->getSession()->setError($error);
                 Cloner::error($error);
 
-                return $this->asErrorJson($error);
+                return $this->asFailure($error);
             }
         }
 
@@ -119,7 +119,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Volume cloned successfully.'));
@@ -145,7 +145,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Transform cloned successfully.'));
@@ -170,7 +170,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Category group cloned successfully.'));
@@ -195,7 +195,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Tag group cloned successfully.'));
@@ -220,7 +220,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Global set cloned successfully.'));
@@ -245,7 +245,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         Cloner::$plugin->getUserGroups()->setupPermissions($oldUserGroup, $userGroup);
@@ -272,7 +272,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Site cloned successfully.'));
@@ -297,7 +297,7 @@ class CloneController extends Controller
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
-            return $this->asErrorJson($error);
+            return $this->asFailure($error);
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Filesystem cloned successfully.'));
