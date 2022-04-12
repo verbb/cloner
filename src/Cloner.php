@@ -11,6 +11,8 @@ use craft\web\View;
 
 use yii\base\Event;
 
+use Throwable;
+
 class Cloner extends Plugin
 {
     // Properties
@@ -44,11 +46,15 @@ class Cloner extends Plugin
 
     private function _registerResources(): void
     {
-        Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
-            $request = Craft::$app->getRequest();
+        $request = Craft::$app->getRequest();
 
-            // Only ever trigger this for CP requests
-            if (!$request->getIsConsoleRequest() && $request->getIsCpRequest() && !$request->getAcceptsJson() && !Craft::$app->getUser()->getIsGuest()) {
+        // Only ever trigger this for CP requests, and ignore for Ajax
+        if (!$request->getIsCpRequest() || $request->getAcceptsJson()) {
+            return;
+        }
+
+        Event::on(View::class, View::EVENT_END_BODY, function(Event $event) use ($request) {
+            try {
                 $registeredGroups = $this->getService()->getRegisteredGroups();
 
                 $route = Craft::$app->requestedRoute;
@@ -68,7 +74,9 @@ class Cloner extends Plugin
                 // Render our JS + CSS using the provided rule-set as per the matched route
                 $view->registerJs('new Craft.Cloner(' .
                     Json::encode($registeredGroups[$route], JSON_UNESCAPED_UNICODE) .
-                    ');');
+                ');');
+            } catch (Throwable $e) {
+                // Ignore any errors here, usually caught by Craft. Mostly to catch fatal PHP errors properly.
             }
         });
     }
