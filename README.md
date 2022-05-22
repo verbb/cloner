@@ -5,7 +5,7 @@ Adds a simple clone button to most types of content groups, allowing you to easi
 ## Installation
 You can install Cloner via the plugin store, or through Composer.
 
-### Craft Plugin Store
+## Craft Plugin Store
 To install **Cloner**, navigate to the _Plugin Store_ section of your Craft control panel, search for `Cloner`, and click the _Try_ button.
 
 ### Composer
