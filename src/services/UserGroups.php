@@ -32,7 +32,7 @@ class UserGroups extends Service
     }
 
     public function setupPermissions($oldUserGroup, $userGroup)
-    {   
+    {
         $permissions = Craft::$app->getUserPermissions()->getPermissionsByGroupId($oldUserGroup->id);
 
         Craft::$app->getUserPermissions()->saveGroupPermissions($userGroup->id, $permissions);

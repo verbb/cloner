@@ -13,7 +13,7 @@ use yii\base\Event;
 
 class Cloner extends Plugin
 {
-    // Public Properties
+    // Properties
     // =========================================================================
 
     public $schemaVersion = '1.0.0';
