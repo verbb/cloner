@@ -1,11 +1,9 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
 use Craft;
-use craft\elements\User;
 use craft\models\UserGroup;
 
 class UserGroups extends Service
@@ -22,7 +20,7 @@ class UserGroups extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedUserGroup($oldUserGroup, $name, $handle)
+    public function setupClonedUserGroup($oldUserGroup, $name, $handle): UserGroup
     {
         $userGroup = new UserGroup();
         $userGroup->name = $name;
@@ -31,7 +29,7 @@ class UserGroups extends Service
         return $userGroup;
     }
 
-    public function setupPermissions($oldUserGroup, $userGroup)
+    public function setupPermissions($oldUserGroup, $userGroup): void
     {
         $permissions = Craft::$app->getUserPermissions()->getPermissionsByGroupId($oldUserGroup->id);
 

@@ -1,7 +1,6 @@
 <?php
 namespace verbb\cloner\base;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\events\RegisterClonerGroupEvent;
 use verbb\cloner\services\AssetTransforms;
 use verbb\cloner\services\CategoryGroups;
@@ -13,7 +12,6 @@ use verbb\cloner\services\TagGroups;
 use verbb\cloner\services\UserGroups;
 use verbb\cloner\services\Volumes;
 
-use Craft;
 use craft\base\Component;
 use craft\models\FieldLayout;
 use craft\models\FieldLayoutTab;
@@ -29,12 +27,7 @@ class Service extends Component
     // Public Methods
     // =========================================================================
 
-    public function init()
-    {
-        parent::init();
-    }
-
-    public function getRegisteredGroups()
+    public function getRegisteredGroups(): array
     {
         $groups = [];
         $registeredClasses = [
@@ -66,14 +59,14 @@ class Service extends Component
         return $event->groups;
     }
 
-    public function cloneAttributes($oldModel, $newModel, $attributes)
+    public function cloneAttributes($oldModel, $newModel, $attributes): void
     {
         foreach ($attributes as $attr) {
             $newModel->$attr = $oldModel->$attr;
         }
     }
 
-    public function getFieldLayout($oldFieldLayout)
+    public function getFieldLayout($oldFieldLayout): FieldLayout
     {
         $layout = new FieldLayout();
         $layout->type = $oldFieldLayout->type;

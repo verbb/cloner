@@ -1,14 +1,10 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
 use Craft;
-use craft\elements\Asset;
-use craft\helpers\StringHelper;
-use craft\models\AssetTransform;
-use craft\models\Volume;
+use craft\base\VolumeInterface;
 
 class Volumes extends Service
 {
@@ -24,7 +20,7 @@ class Volumes extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedVolume($oldVolume, $name, $handle)
+    public function setupClonedVolume($oldVolume, $name, $handle): VolumeInterface
     {
         $volume = Craft::$app->getVolumes()->createVolume([
             'type' => get_class($oldVolume),

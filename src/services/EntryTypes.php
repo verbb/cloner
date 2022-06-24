@@ -1,16 +1,9 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
-use craft\base\Component;
-use craft\element\Entry;
-use craft\helpers\StringHelper;
 use craft\models\EntryType;
-use craft\models\Section;
-use craft\models\Section_SiteSettings;
 
 class EntryTypes extends Service
 {
@@ -32,7 +25,7 @@ class EntryTypes extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedEntryType($oldEntryType, $newEntryName, $newEntryHandle)
+    public function setupClonedEntryType($oldEntryType, $newEntryName, $newEntryHandle): EntryType
     {
         $entryType = new EntryType();
         $entryType->name = $newEntryName;

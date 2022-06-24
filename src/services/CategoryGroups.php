@@ -1,11 +1,8 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
-use craft\elements\Category;
 use craft\helpers\StringHelper;
 use craft\models\CategoryGroup;
 use craft\models\CategoryGroup_SiteSettings;
@@ -24,7 +21,7 @@ class CategoryGroups extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedCategoryGroup($oldCategoryGroup, $name, $handle)
+    public function setupClonedCategoryGroup($oldCategoryGroup, $name, $handle): CategoryGroup
     {
         $categoryGroup = new CategoryGroup();
         $categoryGroup->name = $name;

@@ -1,11 +1,8 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
-use craft\elements\Tag;
 use craft\models\TagGroup;
 
 class TagGroups extends Service
@@ -22,7 +19,7 @@ class TagGroups extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedTagGroup($oldTagGroup, $name, $handle)
+    public function setupClonedTagGroup($oldTagGroup, $name, $handle): TagGroup
     {
         $tagGroup = new TagGroup();
         $tagGroup->name = $name;

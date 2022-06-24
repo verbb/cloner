@@ -1,10 +1,8 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
 use craft\elements\GlobalSet;
 
 class GlobalSets extends Service
@@ -21,7 +19,7 @@ class GlobalSets extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedGlobalSet($oldGlobalSet, $name, $handle)
+    public function setupClonedGlobalSet($oldGlobalSet, $name, $handle): GlobalSet
     {
         $globalSet = new GlobalSet();
         $globalSet->name = $name;

@@ -1,7 +1,6 @@
 <?php
 namespace verbb\cloner\base;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\services\AssetTransforms;
 use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
@@ -79,7 +78,7 @@ trait PluginTrait
         return $this->get('volumes');
     }
 
-    public static function log($message, $attributes = [])
+    public static function log($message, $attributes = []): void
     {
         if ($attributes) {
             $message = Craft::t('cloner', $message, $attributes);
@@ -88,7 +87,7 @@ trait PluginTrait
         Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'cloner');
     }
 
-    public static function error($message, $attributes = [])
+    public static function error($message, $attributes = []): void
     {
         if ($attributes) {
             $message = Craft::t('cloner', $message, $attributes);
@@ -101,7 +100,7 @@ trait PluginTrait
     // Private Methods
     // =========================================================================
 
-    private function _setPluginComponents()
+    private function _setPluginComponents(): void
     {
         $this->setComponents([
             'assetTransforms' => AssetTransforms::class,
@@ -119,7 +118,7 @@ trait PluginTrait
         BaseHelper::registerModule();
     }
 
-    private function _setLogging()
+    private function _setLogging(): void
     {
         BaseHelper::setFileLogging('cloner');
     }

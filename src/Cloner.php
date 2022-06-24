@@ -28,7 +28,7 @@ class Cloner extends Plugin
     // Public Methods
     // =========================================================================
 
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -42,7 +42,7 @@ class Cloner extends Plugin
     // Private Methods
     // =========================================================================
 
-    private function _registerResources()
+    private function _registerResources(): void
     {
         Event::on(View::class, View::EVENT_END_BODY, function(Event $event) {
             $request = Craft::$app->getRequest();

@@ -1,11 +1,8 @@
 <?php
 namespace verbb\cloner\services;
 
-use verbb\cloner\Cloner;
 use verbb\cloner\base\Service;
 
-use Craft;
-use craft\helpers\StringHelper;
 use craft\models\Site;
 
 class Sites extends Service
@@ -22,7 +19,7 @@ class Sites extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedSite($oldSite, $name, $handle)
+    public function setupClonedSite($oldSite, $name, $handle): Site
     {
         $site = new Site();
         $site->name = $name;
