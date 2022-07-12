@@ -81,16 +81,20 @@ Craft.Cloner = Garnish.Base.extend({
             $addBtn.addClass('hidden');
             $spinner.removeClass('hidden');
 
-            Craft.postActionRequest(this.action, data, $.proxy(function(response, textStatus) {
-                if (response && response.success) {
+            Craft.sendActionRequest('POST', this.action, { data })
+                .then((response) => {
                     window.location.reload();
-                } else {
-                    Craft.cp.displayError(Craft.t('cloner', response.error));
-
+                })
+                .catch(({response}) => {
                     $addBtn.removeClass('hidden');
                     $spinner.addClass('hidden');
-                }
-            }, this));
+
+                    if (response && response.data && response.data.message) {
+                        Craft.cp.displayError(response.data.message);
+                    } else {
+                        Craft.cp.displayError();
+                    }
+                });
         }
     },
 
