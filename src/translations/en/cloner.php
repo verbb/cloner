@@ -1,0 +1,27 @@
+<?php
+
+return [
+	'hidden' => 'hidden',
+	'Couldn’t clone entry type - {i}.' => 'Couldn’t clone entry type - {i}.',
+	'Entry type cloned successfully.' => 'Entry type cloned successfully.',
+	'Couldn’t clone section - {i}.' => 'Couldn’t clone section - {i}.',
+	'Couldn’t section’s default entry type - {i}.' => 'Couldn’t section’s default entry type - {i}.',
+	'Couldn’t section’s entry type - {i}.' => 'Couldn’t section’s entry type - {i}.',
+	'Section cloned successfully.' => 'Section cloned successfully.',
+	'Couldn’t clone volume - {i}.' => 'Couldn’t clone volume - {i}.',
+	'Volume cloned successfully.' => 'Volume cloned successfully.',
+	'Couldn’t clone transform - {i}.' => 'Couldn’t clone transform - {i}.',
+	'Transform cloned successfully.' => 'Transform cloned successfully.',
+	'Couldn’t clone category group - {i}.' => 'Couldn’t clone category group - {i}.',
+	'Category group cloned successfully.' => 'Category group cloned successfully.',
+	'Couldn’t clone tag group - {i}.' => 'Couldn’t clone tag group - {i}.',
+	'Tag group cloned successfully.' => 'Tag group cloned successfully.',
+	'Couldn’t clone global set - {i}.' => 'Couldn’t clone global set - {i}.',
+	'Global set cloned successfully.' => 'Global set cloned successfully.',
+	'Couldn’t clone user group - {i}.' => 'Couldn’t clone user group - {i}.',
+	'User group cloned successfully.' => 'User group cloned successfully.',
+	'Couldn’t clone site - {i}.' => 'Couldn’t clone site - {i}.',
+	'Site cloned successfully.' => 'Site cloned successfully.',
+	'Couldn’t clone filesystem - {i}.' => 'Couldn’t clone filesystem - {i}.',
+	'Filesystem cloned successfully.' => 'Filesystem cloned successfully.',
+];
