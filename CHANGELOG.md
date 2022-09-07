@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.1 - 2022-09-08
+
+### Added
+- Add missing English translations.
+
+### Changed
+- Replace deprecated `Craft.postActionRequest()` for JS.
+
 ## 2.0.0 - 2022-07-10
 
 ### Changed
