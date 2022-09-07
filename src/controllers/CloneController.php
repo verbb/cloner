@@ -19,7 +19,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
@@ -44,7 +44,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
@@ -106,7 +106,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
@@ -131,7 +131,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
@@ -157,7 +157,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
@@ -182,7 +182,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
@@ -207,7 +207,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
@@ -232,7 +232,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
@@ -259,7 +259,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
@@ -284,7 +284,7 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = $request->getParam('id');
+        $id = (int)$request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
