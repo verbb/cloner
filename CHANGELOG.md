@@ -8,6 +8,9 @@
 ### Changed
 - Replace deprecated `Craft.postActionRequest()` for JS.
 
+### Fixed
+- Fix a type error when cloning objects.
+
 ## 2.0.0 - 2022-07-10
 
 ### Changed
