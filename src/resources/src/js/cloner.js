@@ -69,6 +69,12 @@ Craft.Cloner = Garnish.Base.extend({
         // Vuetable doesn't give us the IDs of each row, so figure it out
         var $row = $(e.currentTarget).parents('tr');
         var href = $row.find('td:first a').attr('href');
+
+        // Some tables use `th`
+        if (!href) {
+            href = $row.find('th:first a').attr('href');
+        }
+
         var segments = href.split('?')[0].split('/');
         var rowId = segments[segments.length - 1];
         var name;
