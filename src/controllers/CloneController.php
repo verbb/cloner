@@ -284,11 +284,11 @@ class CloneController extends Controller
     {
         $request = Craft::$app->getRequest();
 
-        $id = (int)$request->getParam('id');
+        $oldHandle = $request->getParam('id');
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
-        $oldFilesystem = Craft::$app->getFs()->getFilesystemByHandle($id);
+        $oldFilesystem = Craft::$app->getFs()->getFilesystemByHandle($oldHandle);
 
         $filesystem = Cloner::$plugin->getFilesystems()->setupClonedFilesystem($oldFilesystem, $name, $handle);
 
