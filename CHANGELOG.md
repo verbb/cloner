@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.2 - 2022-10-08
+
+### Fixed
+- Fix being unable to clone sites.
+- Fix an error when cloning Filesystems.
+- Fix an error when cloning.
+
 ## 2.0.1 - 2022-09-08
 
 ### Added
