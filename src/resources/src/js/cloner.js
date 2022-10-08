@@ -22,6 +22,11 @@ Craft.Cloner = Garnish.Base.extend({
             this.title = 'New ' + settings.title + ' Name';
             this.action = 'cloner/' + settings.action;
 
+            // Not everything is using Vuetable
+            if (!this.$table.length) {
+                this.$table = $('#' + settings.id);
+            }
+
             this.setupTable();
         }, this));
     },
