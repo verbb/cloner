@@ -1,6 +1,7 @@
 <?php
 namespace verbb\cloner\base;
 
+use craft\helpers\StringHelper;
 use verbb\cloner\events\RegisterClonerGroupEvent;
 use verbb\cloner\services\ImageTransforms;
 use verbb\cloner\services\CategoryGroups;
@@ -70,8 +71,25 @@ class Service extends Component
 
     public function getFieldLayout($oldFieldLayout): FieldLayout
     {
-        return FieldLayout::createFromConfig($oldFieldLayout->getConfig());
+        $config = $oldFieldLayout->getConfig();
+
+        // ensure all UUIDs are unique
+        $this->cycleUids($config);
+
+        return FieldLayout::createFromConfig($config);
     }
 
+    private function cycleUids(array &$config): void
+    {
+        if (isset($config['uid']) && is_string($config['uid']) && StringHelper::isUUID($config['uid'])) {
+            $config['uid'] = StringHelper::UUID();
+        }
 
+        // check nested arrays
+        foreach ($config as &$value) {
+            if (is_array($value)) {
+                $this->cycleUids($value);
+            }
+        }
+    }
 }
