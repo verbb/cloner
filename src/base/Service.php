@@ -62,16 +62,20 @@ class Service extends Component
         return $event->groups;
     }
 
-    public function cloneAttributes($oldModel, $newModel, $attributes): void
+    public function cloneAttributes($oldModel, $newModel, array $attributes): void
     {
         foreach ($attributes as $attr) {
             $newModel->$attr = $oldModel->$attr;
         }
     }
 
-    public function getFieldLayout($oldFieldLayout): FieldLayout
+    public function getFieldLayout(FieldLayout $oldFieldLayout): FieldLayout
     {
         $config = $oldFieldLayout->getConfig();
+
+        if (!$config) {
+            $config = [];
+        }
 
         // ensure all UUIDs are unique
         $this->cycleUids($config);

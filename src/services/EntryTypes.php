@@ -19,7 +19,7 @@ class EntryTypes extends Service
     //
     public static string $action = 'clone/entry-type';
     public static string $id = 'entrytypes';
-    public static string $matchedRoute = 'sections/entry-types-index';
+    public static string $matchedRoute = 'entry-types/index';
     public static string $title = 'Entry Type';
 
 
@@ -33,21 +33,9 @@ class EntryTypes extends Service
         $entryType->handle = $newEntryHandle;
 
         $this->cloneAttributes($oldEntryType, $entryType, [
-            'sectionId',
-        ]);
-
-        // Set the field layout
-        $fieldLayout = $this->getFieldLayout($oldEntryType->getFieldLayout());
-        $entryType->setFieldLayout($fieldLayout);
-
-        return $entryType;
-    }
-
-    public function setupDefaultEntryType($oldEntryType, $entryType): EntryType
-    {
-        $this->cloneAttributes($oldEntryType, $entryType, [
             'hasTitleField',
             'titleFormat',
+            'showStatusField',
         ]);
 
         // Set the field layout

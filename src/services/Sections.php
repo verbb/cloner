@@ -30,9 +30,12 @@ class Sections extends Service
 
         $this->cloneAttributes($oldSection, $section, [
             'type',
+            'entryTypes',
             'enableVersioning',
             'propagationMethod',
             'maxLevels',
+            'defaultPlacement',
+            'previewTargets',
         ]);
 
         $allSiteSettings = [];

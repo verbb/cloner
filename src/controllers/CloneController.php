@@ -23,11 +23,11 @@ class CloneController extends Controller
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
-        $oldEntryType = Craft::$app->getSections()->getEntryTypeById($id);
+        $oldEntryType = Craft::$app->getEntries()->getEntryTypeById($id);
 
         $entryType = Cloner::$plugin->getEntryTypes()->setupClonedEntryType($oldEntryType, $name, $handle);
 
-        if (!Craft::$app->getSections()->saveEntryType($entryType)) {
+        if (!Craft::$app->getEntries()->saveEntryType($entryType)) {
             $error = Craft::t('cloner', 'Couldn’t clone entry type - {i}.', ['i' => Json::encode($entryType->getErrors())]);
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
@@ -48,53 +48,16 @@ class CloneController extends Controller
         $name = $request->getParam('name');
         $handle = $request->getParam('handle');
 
-        $oldSection = Craft::$app->getSections()->getSectionById($id);
+        $oldSection = Craft::$app->getEntries()->getSectionById($id);
 
-        $section = Cloner::$plugin->getSections()->setupClonedSection($oldSection, $name, $handle);
+        $section = Cloner::$plugin->getEntries()->setupClonedSection($oldSection, $name, $handle);
 
-        if (!Craft::$app->getSections()->saveSection($section)) {
+        if (!Craft::$app->getEntries()->saveSection($section)) {
             $error = Craft::t('cloner', 'Couldn’t clone section - {i}.', ['i' => Json::encode($section->getErrors())]);
             Craft::$app->getSession()->setError($error);
             Cloner::error($error);
 
             return $this->asFailure($error);
-        }
-
-        // Split off the default entry type
-        $oldDefaultEntryType = $oldSection->getEntryTypes()[0];
-        $newDefaultEntryType = $section->getEntryTypes()[0];
-
-        // Because a new section will already have a default entry type, we want to treat that a little different
-        // Instead, we just want to copy the field layout from the old section to the new one - not create a new one.
-        $defaultEntryType = Cloner::$plugin->getEntryTypes()->setupDefaultEntryType($oldDefaultEntryType, $newDefaultEntryType);
-
-        if (!Craft::$app->getSections()->saveEntryType($defaultEntryType)) {
-            $error = Craft::t('cloner', 'Couldn’t section’s default entry type - {i}.', ['i' => Json::encode($defaultEntryType->getErrors())]);
-            Craft::$app->getSession()->setError($error);
-            Cloner::error($error);
-
-            return $this->asFailure($error);
-        }
-
-        foreach ($oldSection->getEntryTypes() as $key => $oldEntryType) {
-            // We want to skip the default entry type - already done!
-            if ($key === 0) {
-                continue;
-            }
-
-            $newEntryName = $oldEntryType->name;
-            $newEntryHandle = $oldEntryType->handle;
-
-            $entryType = Cloner::$plugin->getEntryTypes()->setupClonedEntryType($oldEntryType, $newEntryName, $newEntryHandle);
-            $entryType->sectionId = $section->id;
-
-            if (!Craft::$app->getSections()->saveEntryType($entryType)) {
-                $error = Craft::t('cloner', 'Couldn’t section’s entry type - {i}.', ['i' => Json::encode($entryType->getErrors())]);
-                Craft::$app->getSession()->setError($error);
-                Cloner::error($error);
-
-                return $this->asFailure($error);
-            }
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Section cloned successfully.'));

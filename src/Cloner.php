@@ -36,8 +36,6 @@ class Cloner extends Plugin
 
         self::$plugin = $this;
 
-        $this->_setPluginComponents();
-        $this->_setLogging();
         $this->_registerResources();
     }
 

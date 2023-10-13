@@ -3,6 +3,7 @@ namespace verbb\cloner\services;
 
 use verbb\cloner\base\Service;
 
+use craft\helpers\StringHelper;
 use craft\models\Volume;
 
 class Volumes extends Service
@@ -25,6 +26,9 @@ class Volumes extends Service
             'name' => $name,
             'handle' => $handle,
             'fsHandle' => $oldVolume->fsHandle,
+            'subpath' => $oldVolume->subpath . StringHelper::randomString(5),
+            'transformFsHandle' => $oldVolume->transformFsHandle,
+            'transformSubpath' => $oldVolume->transformSubpath . StringHelper::randomString(5),
         ]);
 
         // Set the field layout
