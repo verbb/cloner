@@ -48,7 +48,7 @@ Craft.Cloner = Garnish.Base.extend({
 
             this.$table.find('tbody tr').each(function() {
                 var $actionElement = $(this).find('td a[role="button"]').parents('td');
-                var $cloneButton = $('<a class="add icon"></a><span class="spinner cloner-spinner hidden"></span>');
+                var $cloneButton = $('<a href="#" class="add icon"></a><span class="spinner cloner-spinner hidden"></span>');
 
                 if (!$actionElement.length) {
                     var $col = $('<td class="thin"></td>').html($cloneButton);
