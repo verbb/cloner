@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-          "verbb\\cloner\\": "src/"
+            "verbb\\cloner\\": "src/"
         }
     },
     "extra": {
