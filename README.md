@@ -1,5 +1,5 @@
-# Cloner plugin for Craft CMS
-<img width="500" src="https://verbb.imgix.net/plugins/cloner/cloner-social-card.png?v=2">
+<p align="center"><img src="https://verbb.imgix.net/plugins/cloner/cloner-icon.svg" width="100" height="100" alt="Cloner icon"></p>
+<h1 align="center">Cloner for Craft CMS</h1>
 
 Cloner is a Craft CMS plugin that adds a simple clone button to most types of content groups, allowing you to easily clone sections, entry types, category groups, user groups and more.
 
