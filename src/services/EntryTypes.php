@@ -19,7 +19,7 @@ class EntryTypes extends Service
     //
     public static string $action = 'clone/entry-type';
     public static string $id = 'entrytypes';
-    public static string $matchedRoute = 'entry-types/index';
+    public static string $matchedRoute = 'settings/entry-types';
     public static string $title = 'Entry Type';
 
 

@@ -12,6 +12,7 @@ if (typeof Craft.Cloner === typeof undefined) {
 (function($) {
 
 Craft.Cloner = Garnish.Base.extend({
+    table: null,
     $table: null,
     title: null,
     action: null,
@@ -27,21 +28,60 @@ Craft.Cloner = Garnish.Base.extend({
                 this.$table = $('#' + settings.id);
             }
 
+            // Setup the table for on-load instances
             this.setupTable();
-        }, this));
+
+            this.table = document.querySelector('#' + settings.id + '-vue-admin-table table');
+
+            // Some admin tables are lazy-loaded and filterable (Entry Types) and because they're Vue-based
+            // we don't have access to events. So watch for row changes to the table to re-bind things.
+            this.observeTableRows(this.table, function() {
+                this.setupTable();
+            }.bind(this));
+        });
+    },
+
+    observeTableRows: function(tableElement, callback) {
+        // Check if the input is a valid table element
+        if (!(tableElement instanceof HTMLTableElement)) {
+            throw new Error("The provided element is not a valid HTMLTableElement.");
+        }
+
+        // Callback function for the MutationObserver
+        function mutationCallback(mutationsList) {
+            for (const mutation of mutationsList) {
+                // Check if the mutation affects the table rows
+                if (mutation.type === 'childList' && (mutation.target.tagName === 'TBODY' || mutation.target.tagName === 'TABLE')) {
+                    callback();
+                    break;
+                }
+            }
+        }
+
+        const observer = new MutationObserver(mutationCallback);
+
+        // Start observing the table element
+        observer.observe(tableElement, {
+            childList: true,
+            subtree: true // To capture changes in tbody and rows
+        });
     },
 
     setupTable: function() {
         var self = this;
 
         if (this.$table.length) {
+            // Cleanup in case of re-binding due to mutation observer
+            this.$table.find('.cloner-th').remove();
+            this.$table.find('.cloner-td').remove();
+
             this.$table.find('thead tr').each(function() {
                 var $actionElement = $(this).find('td.thin:first');
 
                 if (!$actionElement.length) {
-                    $(this).append('<td class="thin"></td>');
+                    $(this).append('<td class="thin cloner-th"></td>');
                 } else {
-                    var $col = $('<td class="thin"></td>');
+                    var $col = $('<td class="thin cloner-th"></td>');
                     $actionElement.before($col);
                 }
             });
@@ -51,10 +91,10 @@ Craft.Cloner = Garnish.Base.extend({
                 var $cloneButton = $('<a href="#" class="add icon"></a><span class="spinner cloner-spinner hidden"></span>');
 
                 if (!$actionElement.length) {
-                    var $col = $('<td class="thin"></td>').html($cloneButton);
+                    var $col = $('<td class="thin cloner-td"></td>').html($cloneButton);
                     $(this).append($col);
                 } else {
-                    var $col = $('<td class="thin"></td>').html($cloneButton);
+                    var $col = $('<td class="thin cloner-td"></td>').html($cloneButton);
                     $actionElement.before($col);
                 }
 
