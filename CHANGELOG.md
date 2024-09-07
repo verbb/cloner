@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1 - 2024-09-07
+
+### Fixed
+- Fix Entry Type cloning, and support ajax-based, filterable admin tables.
+
 ## 3.0.0 - 2024-05-11
 
 ### Changed
