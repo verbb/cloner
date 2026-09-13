@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+- Updated documentation for clearer, more consistent guidance.
+
 ## 3.0.1 - 2024-09-07
 
 ### Fixed
