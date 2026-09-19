@@ -10,6 +10,7 @@ Supports cloning:
 - Filesystems
 - Global Sets
 - Sections
+- Sites
 - Tag Groups
 - User Groups
 - Volumes
