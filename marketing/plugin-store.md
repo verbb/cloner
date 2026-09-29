@@ -4,11 +4,10 @@ The second section with a familiar shape should not take as long as the first. S
 
 ## Features
 
-- **Sections and entry types:** Duplicate established content structures and their configuration.
-- **Category and tag groups:** Create a new taxonomy from an existing group’s setup.
-- **User groups:** Reuse a group as the basis for a new permissions workflow.
-- **Volumes and filesystems:** Copy asset storage configurations before tailoring the destination.
-- **Asset transforms:** Repeat image-transform settings without re-entering every dimension and mode.
-- **Global sets:** Create a new global-set configuration from a proven starting point.
-- **Sites:** Duplicate an existing site's settings before tailoring its name, handle, language, and URL.
-- **Yours to change:** The duplicate is a normal Craft configuration item, ready to adjust through the usual settings screens. Cloner handles the repetitive setup and then gets out of the way.
+- Duplicate established content structures and their configuration.
+- Create a new taxonomy from an existing group's setup.
+- Reuse a group as the basis for a new permissions workflow.
+- Copy asset storage configurations before tailoring the destination.
+- Repeat image-transform settings without re-entering every dimension and mode.
+- Create a new global-set configuration from a proven starting point.
+- Duplicate an existing site's settings before tailoring its name, handle, language, and URL.
