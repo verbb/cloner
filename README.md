@@ -7,24 +7,28 @@ The second section with a familiar shape should not take as long as the first. S
 
 ## Features
 
-- Duplicate established content structures and their configuration.
+- Duplicate established content-structure configuration without copying content.
 - Create a new taxonomy from an existing group's setup.
-- Reuse a group as the basis for a new permissions workflow.
+- Copy a user group's permissions as the basis for a new role.
 - Copy asset storage configurations before tailoring the destination.
 - Repeat image-transform settings without re-entering every dimension and mode.
 - Create a new global-set configuration from a proven starting point.
 - Duplicate an existing site's settings before tailoring its name, handle, language, and URL.
 
 ## Documentation
+
 Visit the [Cloner Plugin page](https://verbb.io/craft-plugins/cloner) for all documentation, guides, pricing and developer resources.
 
 ## Credit & Thanks
+
 Based on [Cloner](https://github.com/kymar/craft_cloner) for Craft 2.
 
 ## Support
+
 Get in touch with us via the [Cloner Support page](https://verbb.io/craft-plugins/cloner/support) or by [creating a Github issue](https://github.com/verbb/cloner/issues)
 
 ## Sponsor
+
 Cloner is licensed under the MIT license, meaning it will always be free and open source - we love free stuff! If you'd like to show your support to the plugin regardless, [Sponsor](https://github.com/sponsors/verbb) development.
 
 <h2></h2>

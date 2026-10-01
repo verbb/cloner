@@ -4,9 +4,9 @@ The second section with a familiar shape should not take as long as the first. S
 
 ## Features
 
-- Duplicate established content structures and their configuration.
+- Duplicate established content-structure configuration without copying content.
 - Create a new taxonomy from an existing group's setup.
-- Reuse a group as the basis for a new permissions workflow.
+- Copy a user group's permissions as the basis for a new role.
 - Copy asset storage configurations before tailoring the destination.
 - Repeat image-transform settings without re-entering every dimension and mode.
 - Create a new global-set configuration from a proven starting point.
