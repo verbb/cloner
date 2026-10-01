@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- Fixed a high-severity missing authorization vulnerability.
+- Fixed a moderate-severity CSRF vulnerability.
+
 ## 3.0.3 - 2026-09-14
 
 ### Changed

@@ -15,11 +15,24 @@ class CloneController extends Controller
     // Public Methods
     // =========================================================================
 
+    public function beforeAction($action): bool
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $this->requireCpRequest();
+        $this->requirePostRequest();
+        $this->requireAdmin();
+
+        return true;
+    }
+
     public function actionEntryType(): Response
     {
-        $id = (int)$this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         $oldEntryType = Craft::$app->getEntries()->getEntryTypeById($id);
 
@@ -40,9 +53,9 @@ class CloneController extends Controller
 
     public function actionSection(): Response
     {
-        $id = (int)$this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         $oldSection = Craft::$app->getEntries()->getSectionById($id);
 
@@ -63,9 +76,9 @@ class CloneController extends Controller
 
     public function actionVolume(): Response
     {
-        $id = (int)$this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         $oldVolume = Craft::$app->getVolumes()->getVolumeById($id);
 
@@ -86,9 +99,9 @@ class CloneController extends Controller
 
     public function actionTransform(): Response
     {
-        $id = (int)$this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         // NOTE: the ID will be the handle, because that's how the URL is set up for transforms
         $oldTransform = Craft::$app->getImageTransforms()->getTransformByHandle($id);
@@ -110,9 +123,9 @@ class CloneController extends Controller
 
     public function actionCategoryGroup(): Response
     {
-        $id = (int)$this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         $oldCategoryGroup = Craft::$app->getCategories()->getGroupById($id);
 
@@ -133,9 +146,9 @@ class CloneController extends Controller
 
     public function actionTagGroup(): Response
     {
-        $id = (int)$this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         $oldTagGroup = Craft::$app->getTags()->getTagGroupById($id);
 
@@ -156,9 +169,9 @@ class CloneController extends Controller
 
     public function actionGlobalSet(): Response
     {
-        $id = (int)$this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         $oldGlobalSet = Craft::$app->getGlobals()->getSetById($id);
 
@@ -179,9 +192,9 @@ class CloneController extends Controller
 
     public function actionUserGroup(): Response
     {
-        $id = (int)$this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         $oldUserGroup = Craft::$app->getUserGroups()->getGroupById($id);
 
@@ -204,9 +217,9 @@ class CloneController extends Controller
 
     public function actionSite(): Response
     {
-        $id = (int)$this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         $oldSite = Craft::$app->getSites()->getSiteById($id);
 
@@ -227,9 +240,9 @@ class CloneController extends Controller
 
     public function actionFilesystem(): Response
     {
-        $oldHandle = $this->request->getParam('id');
-        $name = $this->request->getParam('name');
-        $handle = $this->request->getParam('handle');
+        $oldHandle = $this->request->getRequiredBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $handle = $this->request->getRequiredBodyParam('handle');
 
         $oldFilesystem = Craft::$app->getFs()->getFilesystemByHandle($oldHandle);
 
