@@ -12,20 +12,19 @@ class GlobalSets extends Service
 
     public static string $action = 'clone/global-set';
     public static string $id = 'sets';
-    public static string $matchedRoute = 'settings/globals';
+    public static string $matchedRoute = 'system-settings/global-set-index';
     public static string $title = 'Global Set';
 
 
     // Public Methods
     // =========================================================================
 
-    public function setupClonedGlobalSet($oldGlobalSet, $name, $handle): GlobalSet
+    public function setupClonedGlobalSet(GlobalSet $oldGlobalSet, string $name, string $handle): GlobalSet
     {
         $globalSet = new GlobalSet();
         $globalSet->name = $name;
         $globalSet->handle = $handle;
 
-        // Set the field layout
         $fieldLayout = $this->getFieldLayout($oldGlobalSet->getFieldLayout());
         $globalSet->setFieldLayout($fieldLayout);
 

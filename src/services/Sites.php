@@ -19,18 +19,16 @@ class Sites extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedSite($oldSite, string $name, $handle): Site
+    public function setupClonedSite(Site $oldSite, string $name, string $handle): Site
     {
-        $site = new Site();
+        $site = clone $oldSite;
+        $site->id = null;
+        $site->uid = null;
+        $site->primary = false;
+        $site->dateCreated = null;
+        $site->dateUpdated = null;
         $site->name = $name;
         $site->handle = $handle;
-
-        $this->cloneAttributes($oldSite, $site, [
-            'groupId',
-            'language',
-            'hasUrls',
-            'baseUrl',
-        ]);
 
         return $site;
     }

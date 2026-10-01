@@ -19,21 +19,13 @@ class ImageTransforms extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedTransform($oldTransform, $name, $handle): ImageTransform
+    public function setupClonedTransform(ImageTransform $oldTransform, string $name, string $handle): ImageTransform
     {
-        $transform = new ImageTransform();
+        $transform = clone $oldTransform;
+        $transform->id = null;
+        $transform->uid = null;
         $transform->name = $name;
         $transform->handle = $handle;
-
-        $this->cloneAttributes($oldTransform, $transform, [
-            'width',
-            'height',
-            'mode',
-            'position',
-            'quality',
-            'interlace',
-            'format',
-        ]);
 
         return $transform;
     }

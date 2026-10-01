@@ -3,9 +3,7 @@ namespace verbb\cloner\services;
 
 use verbb\cloner\base\Service;
 
-use craft\helpers\StringHelper;
 use craft\models\CategoryGroup;
-use craft\models\CategoryGroup_SiteSettings;
 
 class CategoryGroups extends Service
 {
@@ -21,38 +19,29 @@ class CategoryGroups extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedCategoryGroup($oldCategoryGroup, $name, $handle): CategoryGroup
+    public function setupClonedCategoryGroup(CategoryGroup $oldCategoryGroup, string $name, string $handle): CategoryGroup
     {
-        $categoryGroup = new CategoryGroup();
+        $categoryGroup = clone $oldCategoryGroup;
+        $categoryGroup->id = null;
+        $categoryGroup->uid = null;
+        $categoryGroup->fieldLayoutId = null;
+        $categoryGroup->structureId = null;
+        $categoryGroup->dateDeleted = null;
         $categoryGroup->name = $name;
         $categoryGroup->handle = $handle;
-
-        $this->cloneAttributes($oldCategoryGroup, $categoryGroup, [
-            'maxLevels',
-            'defaultPlacement',
-        ]);
 
         $allSiteSettings = [];
 
         foreach ($oldCategoryGroup->getSiteSettings() as $siteId => $oldSiteSettings) {
-            $siteSettings = new CategoryGroup_SiteSettings();
-
-            $this->cloneAttributes($oldSiteSettings, $siteSettings, [
-                'groupId',
-                'siteId',
-                'hasUrls',
-                'template',
-            ]);
-
-            // Set the new uriFormat
-            $siteSettings->uriFormat = StringHelper::toKebabCase($categoryGroup->name) . '/{slug}';
+            $siteSettings = clone $oldSiteSettings;
+            $siteSettings->id = null;
+            $siteSettings->groupId = null;
 
             $allSiteSettings[$siteId] = $siteSettings;
         }
 
         $categoryGroup->setSiteSettings($allSiteSettings);
 
-        // Set the field layout
         $fieldLayout = $this->getFieldLayout($oldCategoryGroup->getFieldLayout());
         $categoryGroup->setFieldLayout($fieldLayout);
 

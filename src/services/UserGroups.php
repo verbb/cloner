@@ -20,24 +20,22 @@ class UserGroups extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedUserGroup($oldUserGroup, $name, $handle): UserGroup
+    public function setupClonedUserGroup(UserGroup $oldUserGroup, string $name, string $handle): UserGroup
     {
-        $userGroup = new UserGroup();
+        $userGroup = clone $oldUserGroup;
+        $userGroup->id = null;
+        $userGroup->uid = null;
         $userGroup->name = $name;
         $userGroup->handle = $handle;
-
-        $this->cloneAttributes($oldUserGroup, $userGroup, [
-            'description',
-        ]);
 
         return $userGroup;
     }
 
-    public function setupPermissions($oldUserGroup, $userGroup): void
+    public function setupPermissions(UserGroup $oldUserGroup, UserGroup $userGroup): bool
     {
         $permissions = Craft::$app->getUserPermissions()->getPermissionsByGroupId($oldUserGroup->id);
 
-        Craft::$app->getUserPermissions()->saveGroupPermissions($userGroup->id, $permissions);
+        return Craft::$app->getUserPermissions()->saveGroupPermissions($userGroup->id, $permissions);
     }
 
 }

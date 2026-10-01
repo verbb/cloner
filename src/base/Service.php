@@ -71,29 +71,47 @@ class Service extends Component
 
     public function getFieldLayout(FieldLayout $oldFieldLayout): FieldLayout
     {
-        $config = $oldFieldLayout->getConfig();
+        $config = $oldFieldLayout->getConfig() ?? [];
+        $uidMap = [];
 
-        if (!$config) {
-            $config = [];
-        }
+        // Layout references such as card views and thumbnails must follow their newly generated element UIDs.
+        $this->_cycleUids($config, $uidMap);
+        $this->_remapUidReferences($config, $uidMap);
 
-        // ensure all UUIDs are unique
-        $this->cycleUids($config);
+        $fieldLayout = FieldLayout::createFromConfig($config);
+        $fieldLayout->type = $oldFieldLayout->type;
 
-        return FieldLayout::createFromConfig($config);
+        return $fieldLayout;
     }
 
-    private function cycleUids(array &$config): void
+    // Private Methods
+    // =========================================================================
+
+    private function _cycleUids(array &$config, array &$uidMap): void
     {
         if (isset($config['uid']) && is_string($config['uid']) && StringHelper::isUUID($config['uid'])) {
+            $oldUid = $config['uid'];
             $config['uid'] = StringHelper::UUID();
+            $uidMap[$oldUid] = $config['uid'];
         }
 
-        // check nested arrays
         foreach ($config as &$value) {
             if (is_array($value)) {
-                $this->cycleUids($value);
+                $this->_cycleUids($value, $uidMap);
             }
         }
+        unset($value);
+    }
+
+    private function _remapUidReferences(array &$config, array $uidMap): void
+    {
+        foreach ($config as &$value) {
+            if (is_array($value)) {
+                $this->_remapUidReferences($value, $uidMap);
+            } elseif (is_string($value)) {
+                $value = strtr($value, $uidMap);
+            }
+        }
+        unset($value);
     }
 }

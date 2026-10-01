@@ -19,13 +19,16 @@ class TagGroups extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedTagGroup($oldTagGroup, $name, $handle): TagGroup
+    public function setupClonedTagGroup(TagGroup $oldTagGroup, string $name, string $handle): TagGroup
     {
-        $tagGroup = new TagGroup();
+        $tagGroup = clone $oldTagGroup;
+        $tagGroup->id = null;
+        $tagGroup->uid = null;
+        $tagGroup->fieldLayoutId = null;
+        $tagGroup->dateDeleted = null;
         $tagGroup->name = $name;
         $tagGroup->handle = $handle;
 
-        // Set the field layout
         $fieldLayout = $this->getFieldLayout($oldTagGroup->getFieldLayout());
         $tagGroup->setFieldLayout($fieldLayout);
 

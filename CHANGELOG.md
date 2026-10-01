@@ -5,6 +5,12 @@
 ### Fixed
 - Fixed a high-severity missing authorization vulnerability.
 - Fixed a moderate-severity CSRF vulnerability.
+- Fixed clones dropping Craft 5 settings, field layout card and thumbnail configuration, environment-aware site values, and raw filesystem references.
+- Fixed volume clones using overlapping filesystem paths.
+- Fixed image transforms failing to clone.
+- Fixed the clone button not appearing for global sets.
+- Fixed clone controls appearing when administrative changes are disabled.
+- Fixed invalid clone sources and permission-copy failures producing incomplete clones or server errors.
 
 ## 3.0.3 - 2026-09-14
 

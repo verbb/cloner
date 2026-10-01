@@ -4,11 +4,13 @@ namespace verbb\cloner\controllers;
 use verbb\cloner\Cloner;
 
 use Craft;
-use craft\elements\Entry;
 use craft\helpers\Json;
 use craft\web\Controller;
 
+use yii\web\BadRequestHttpException;
 use yii\web\Response;
+
+use Throwable;
 
 class CloneController extends Controller
 {
@@ -31,10 +33,10 @@ class CloneController extends Controller
     public function actionEntryType(): Response
     {
         $id = (int)$this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        $oldEntryType = Craft::$app->getEntries()->getEntryTypeById($id);
+        $oldEntryType = $this->_requireSource(Craft::$app->getEntries()->getEntryTypeById($id), 'entry type');
 
         $entryType = Cloner::$plugin->getEntryTypes()->setupClonedEntryType($oldEntryType, $name, $handle);
 
@@ -54,10 +56,10 @@ class CloneController extends Controller
     public function actionSection(): Response
     {
         $id = (int)$this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        $oldSection = Craft::$app->getEntries()->getSectionById($id);
+        $oldSection = $this->_requireSource(Craft::$app->getEntries()->getSectionById($id), 'section');
 
         $section = Cloner::$plugin->getEntries()->setupClonedSection($oldSection, $name, $handle);
 
@@ -77,10 +79,10 @@ class CloneController extends Controller
     public function actionVolume(): Response
     {
         $id = (int)$this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        $oldVolume = Craft::$app->getVolumes()->getVolumeById($id);
+        $oldVolume = $this->_requireSource(Craft::$app->getVolumes()->getVolumeById($id), 'volume');
 
         $volume = Cloner::$plugin->getVolumes()->setupClonedVolume($oldVolume, $name, $handle);
 
@@ -99,12 +101,11 @@ class CloneController extends Controller
 
     public function actionTransform(): Response
     {
-        $id = (int)$this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $oldHandle = (string)$this->request->getRequiredBodyParam('id');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        // NOTE: the ID will be the handle, because that's how the URL is set up for transforms
-        $oldTransform = Craft::$app->getImageTransforms()->getTransformByHandle($id);
+        $oldTransform = $this->_requireSource(Craft::$app->getImageTransforms()->getTransformByHandle($oldHandle), 'transform');
 
         $transform = Cloner::$plugin->getImageTransforms()->setupClonedTransform($oldTransform, $name, $handle);
 
@@ -124,10 +125,10 @@ class CloneController extends Controller
     public function actionCategoryGroup(): Response
     {
         $id = (int)$this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        $oldCategoryGroup = Craft::$app->getCategories()->getGroupById($id);
+        $oldCategoryGroup = $this->_requireSource(Craft::$app->getCategories()->getGroupById($id), 'category group');
 
         $categoryGroup = Cloner::$plugin->getCategoryGroups()->setupClonedCategoryGroup($oldCategoryGroup, $name, $handle);
 
@@ -147,10 +148,10 @@ class CloneController extends Controller
     public function actionTagGroup(): Response
     {
         $id = (int)$this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        $oldTagGroup = Craft::$app->getTags()->getTagGroupById($id);
+        $oldTagGroup = $this->_requireSource(Craft::$app->getTags()->getTagGroupById($id), 'tag group');
 
         $tagGroup = Cloner::$plugin->getTagGroups()->setupClonedTagGroup($oldTagGroup, $name, $handle);
 
@@ -170,10 +171,10 @@ class CloneController extends Controller
     public function actionGlobalSet(): Response
     {
         $id = (int)$this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        $oldGlobalSet = Craft::$app->getGlobals()->getSetById($id);
+        $oldGlobalSet = $this->_requireSource(Craft::$app->getGlobals()->getSetById($id), 'global set');
 
         $globalSet = Cloner::$plugin->getGlobalSets()->setupClonedGlobalSet($oldGlobalSet, $name, $handle);
 
@@ -193,10 +194,10 @@ class CloneController extends Controller
     public function actionUserGroup(): Response
     {
         $id = (int)$this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        $oldUserGroup = Craft::$app->getUserGroups()->getGroupById($id);
+        $oldUserGroup = $this->_requireSource(Craft::$app->getUserGroups()->getGroupById($id), 'user group');
 
         $userGroup = Cloner::$plugin->getUserGroups()->setupClonedUserGroup($oldUserGroup, $name, $handle);
 
@@ -208,7 +209,25 @@ class CloneController extends Controller
             return $this->asFailure($error);
         }
 
-        Cloner::$plugin->getUserGroups()->setupPermissions($oldUserGroup, $userGroup);
+        try {
+            $permissionsSaved = Cloner::$plugin->getUserGroups()->setupPermissions($oldUserGroup, $userGroup);
+        } catch (Throwable $e) {
+            Cloner::error($e->getMessage());
+            $permissionsSaved = false;
+        }
+
+        if (!$permissionsSaved) {
+            try {
+                Craft::$app->getUserGroups()->deleteGroup($userGroup);
+            } catch (Throwable $e) {
+                Cloner::error($e->getMessage());
+            }
+
+            $error = Craft::t('cloner', 'Couldn’t copy permissions to the cloned user group.');
+            Craft::$app->getSession()->setError($error);
+
+            return $this->asFailure($error);
+        }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'User group cloned successfully.'));
 
@@ -218,10 +237,10 @@ class CloneController extends Controller
     public function actionSite(): Response
     {
         $id = (int)$this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        $oldSite = Craft::$app->getSites()->getSiteById($id);
+        $oldSite = $this->_requireSource(Craft::$app->getSites()->getSiteById($id), 'site');
 
         $site = Cloner::$plugin->getSites()->setupClonedSite($oldSite, $name, $handle);
 
@@ -240,11 +259,11 @@ class CloneController extends Controller
 
     public function actionFilesystem(): Response
     {
-        $oldHandle = $this->request->getRequiredBodyParam('id');
-        $name = $this->request->getRequiredBodyParam('name');
-        $handle = $this->request->getRequiredBodyParam('handle');
+        $oldHandle = (string)$this->request->getRequiredBodyParam('id');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
 
-        $oldFilesystem = Craft::$app->getFs()->getFilesystemByHandle($oldHandle);
+        $oldFilesystem = $this->_requireSource(Craft::$app->getFs()->getFilesystemByHandle($oldHandle), 'filesystem');
 
         $filesystem = Cloner::$plugin->getFilesystems()->setupClonedFilesystem($oldFilesystem, $name, $handle);
 
@@ -259,6 +278,20 @@ class CloneController extends Controller
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Filesystem cloned successfully.'));
 
         return $this->asJson(['success' => true]);
+    }
+
+    // Private Methods
+    // =========================================================================
+
+    private function _requireSource(mixed $source, string $type): mixed
+    {
+        if (!$source) {
+            throw new BadRequestHttpException(Craft::t('cloner', 'Invalid {type}.', [
+                'type' => $type,
+            ]));
+        }
+
+        return $source;
     }
 
 }

@@ -3,10 +3,8 @@ namespace verbb\cloner\services;
 
 use verbb\cloner\base\Service;
 
-use craft\elements\Entry;
 use craft\helpers\StringHelper;
 use craft\models\Section;
-use craft\models\Section_SiteSettings;
 
 class Sections extends Service
 {
@@ -22,40 +20,30 @@ class Sections extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedSection($oldSection, $newSectionName, $newSectionHandle): Section
+    public function setupClonedSection(Section $oldSection, string $newSectionName, string $newSectionHandle): Section
     {
-        $section = new Section();
+        $section = clone $oldSection;
+        $section->id = null;
+        $section->uid = null;
+        $section->structureId = null;
         $section->name = $newSectionName;
         $section->handle = $newSectionHandle;
-
-        $this->cloneAttributes($oldSection, $section, [
-            'type',
-            'entryTypes',
-            'enableVersioning',
-            'propagationMethod',
-            'maxLevels',
-            'defaultPlacement',
-            'previewTargets',
-        ]);
+        $section->setEntryTypes($oldSection->getEntryTypes());
 
         $allSiteSettings = [];
 
         foreach ($oldSection->getSiteSettings() as $siteId => $oldSiteSettings) {
-            $siteSettings = new Section_SiteSettings();
+            $siteSettings = clone $oldSiteSettings;
+            $siteSettings->id = null;
+            $siteSettings->sectionId = null;
 
-            $this->cloneAttributes($oldSiteSettings, $siteSettings, [
-                'sectionId',
-                'siteId',
-                'enabledByDefault',
-                'hasUrls',
-                'template',
-            ]);
-
-            // Set the new uriFormat
-            $siteSettings->uriFormat = StringHelper::toKebabCase($section->name);
-
+            // Single URIs must remain unique, while other section types can preserve their full per-site formats.
             if ($section->type !== Section::TYPE_SINGLE) {
-                $siteSettings->uriFormat .= '/{slug}';
+                $siteSettings->uriFormat = $oldSiteSettings->uriFormat;
+            } elseif ($siteSettings->hasUrls) {
+                $oldUriFormat = trim((string)$oldSiteSettings->uriFormat, '/');
+                $newUriSuffix = StringHelper::toKebabCase($newSectionHandle);
+                $siteSettings->uriFormat = $oldUriFormat && $oldUriFormat !== '__home__' ? "$oldUriFormat-$newUriSuffix" : $newUriSuffix;
             }
 
             $allSiteSettings[$siteId] = $siteSettings;

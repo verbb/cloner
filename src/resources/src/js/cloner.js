@@ -35,16 +35,18 @@ Craft.Cloner = Garnish.Base.extend({
 
             // Some admin tables are lazy-loaded and filterable (Entry Types) and because they're Vue-based
             // we don't have access to events. So watch for row changes to the table to re-bind things.
-            this.observeTableRows(this.table, function() {
-                this.setupTable();
-            }.bind(this));
-        });
+            if (this.table) {
+                this.observeTableRows(this.table, function() {
+                    this.setupTable();
+                }.bind(this));
+            }
+        }, this));
     },
 
     observeTableRows: function(tableElement, callback) {
         // Check if the input is a valid table element
         if (!(tableElement instanceof HTMLTableElement)) {
-            throw new Error("The provided element is not a valid HTMLTableElement.");
+            return;
         }
 
         // Callback function for the MutationObserver
@@ -115,6 +117,11 @@ Craft.Cloner = Garnish.Base.extend({
             href = $row.find('th:first a').attr('href');
         }
 
+        if (!href) {
+            Craft.cp.displayError();
+            return;
+        }
+
         var segments = href.split('?')[0].split('/');
         var rowId = segments[segments.length - 1];
         var name;
@@ -151,7 +158,7 @@ Craft.Cloner = Garnish.Base.extend({
 
     generateHandle: function(sourceVal) {
         // Remove HTML tags
-        var handle = sourceVal.replace("/<(.*?)>/g", '');
+        var handle = sourceVal.replace(/<(.*?)>/g, '');
 
         // Remove inner-word punctuation
         handle = handle.replace(/['"‘’“”\[\]\(\)\{\}:]/g, '');

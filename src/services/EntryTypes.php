@@ -3,7 +3,6 @@ namespace verbb\cloner\services;
 
 use verbb\cloner\base\Service;
 
-use craft\elements\Entry;
 use craft\models\EntryType;
 
 class EntryTypes extends Service
@@ -26,19 +25,15 @@ class EntryTypes extends Service
     // Public Methods
     // =========================================================================
 
-    public function setupClonedEntryType($oldEntryType, $newEntryName, $newEntryHandle): EntryType
+    public function setupClonedEntryType(EntryType $oldEntryType, string $newEntryName, string $newEntryHandle): EntryType
     {
-        $entryType = new EntryType();
+        $entryType = clone $oldEntryType;
+        $entryType->id = null;
+        $entryType->uid = null;
+        $entryType->fieldLayoutId = null;
         $entryType->name = $newEntryName;
         $entryType->handle = $newEntryHandle;
 
-        $this->cloneAttributes($oldEntryType, $entryType, [
-            'hasTitleField',
-            'titleFormat',
-            'showStatusField',
-        ]);
-
-        // Set the field layout
         $fieldLayout = $this->getFieldLayout($oldEntryType->getFieldLayout());
         $entryType->setFieldLayout($fieldLayout);
 

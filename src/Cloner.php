@@ -46,8 +46,15 @@ class Cloner extends Plugin
     {
         $request = Craft::$app->getRequest();
 
-        // Only ever trigger this for CP requests, and ignore for Ajax
-        if (!$request->getIsCpRequest() || $request->getAcceptsJson()) {
+        $generalConfig = Craft::$app->getConfig()->getGeneral();
+
+        // Clone controls are only useful for administrators while project config is writable.
+        if (
+            !$request->getIsCpRequest() ||
+            $request->getAcceptsJson() ||
+            !Craft::$app->getUser()->getIsAdmin() ||
+            !$generalConfig->allowAdminChanges
+        ) {
             return;
         }
 
