@@ -1,8 +1,8 @@
 <?php
 namespace verbb\cloner;
 
-use verbb\cloner\assetbundles\ClonerAsset;
 use verbb\cloner\base\PluginTrait;
+use verbb\cloner\web\assets\cp\ClonerAsset;
 
 use Craft;
 use craft\base\Plugin;

@@ -1,10 +1,10 @@
 <?php
-namespace verbb\cloner\assetbundles;
+namespace verbb\cloner\web\assets\cp;
 
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
-use verbb\base\assetbundles\CpAsset as VerbbCpAsset;
+use verbb\base\web\assets\cp\CpAsset as VerbbCpAsset;
 
 class ClonerAsset extends AssetBundle
 {
@@ -13,7 +13,7 @@ class ClonerAsset extends AssetBundle
 
     public function init(): void
     {
-        $this->sourcePath = "@verbb/cloner/resources/dist";
+        $this->sourcePath = '@verbb/cloner/web/assets/cp/dist';
 
         $this->depends = [
             VerbbCpAsset::class,
@@ -21,11 +21,11 @@ class ClonerAsset extends AssetBundle
         ];
 
         $this->css = [
-            'css/cloner.css',
+            'cloner.css',
         ];
 
         $this->js = [
-            'js/cloner.js',
+            'cloner.js',
         ];
 
         parent::init();
