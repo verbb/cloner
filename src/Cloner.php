@@ -48,11 +48,10 @@ class Cloner extends Plugin
 
         $generalConfig = Craft::$app->getConfig()->getGeneral();
 
-        // Clone controls are only useful for administrators while project config is writable.
+        // Clone controls are only useful for CP requests while project config is writable.
         if (
             !$request->getIsCpRequest() ||
             $request->getAcceptsJson() ||
-            !Craft::$app->getUser()->getIsAdmin() ||
             !$generalConfig->allowAdminChanges
         ) {
             return;
@@ -60,6 +59,11 @@ class Cloner extends Plugin
 
         Event::on(View::class, View::EVENT_END_BODY, function(Event $event) use ($request) {
             try {
+                // Defer user hydration so pending Craft migrations can bootstrap against the old database schema.
+                if (!Craft::$app->getUser()->getIsAdmin()) {
+                    return;
+                }
+
                 $registeredGroups = $this->getService()->getRegisteredGroups();
 
                 $route = Craft::$app->requestedRoute;
