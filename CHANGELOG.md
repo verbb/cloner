@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.0.5 - 2026-10-07
 
 ### Fixed
 - Fixed Craft database updates failing when Cloner is loaded.
