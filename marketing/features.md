@@ -5,7 +5,7 @@ Cloner turns a well-configured Craft structure into a reusable starting point. D
 <!-- feature-section -->
 ## Skip the repetitive setup
 
-The second section with a familiar shape should not take as long as the first. Start from an existing configuration, choose a new name and handle, and let Cloner copy the settings — including substantial field layouts — ready for the details that actually need to differ.
+The second section with a familiar shape should not take as long as the first. Start from an existing configuration, choose a new name and handle, and let Cloner copy the settings, including substantial field layouts. Then change only the details that actually need to differ.
 
 <!-- feature-section-end -->
 
@@ -20,7 +20,7 @@ The second section with a familiar shape should not take as long as the first. S
 <!-- feature-grid-end -->
 
 <!-- feature-section -->
-## Yours to change
+## Clones are ordinary Craft settings
 
-Cloner does not create a parallel configuration system. The duplicate is a normal Craft configuration item, ready to adjust through the usual settings screens; it handles the repetitive setup and then gets out of the way.
+Cloner does not create a parallel configuration system. The duplicate is a normal Craft configuration item, ready to adjust through the usual settings screens. Cloner handles the repetitive setup and then gets out of the way.
 <!-- feature-section-end -->
