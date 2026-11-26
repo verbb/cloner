@@ -6,6 +6,7 @@ use verbb\cloner\services\ImageTransforms;
 use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
 use verbb\cloner\services\EventTypes;
+use verbb\cloner\services\Fields;
 use verbb\cloner\services\Filesystems;
 use verbb\cloner\services\GlobalSets;
 use verbb\cloner\services\ListTypes;
@@ -40,6 +41,7 @@ class Service extends Component
             ImageTransforms::class,
             CategoryGroups::class,
             EntryTypes::class,
+            Fields::class,
             Filesystems::class,
             GlobalSets::class,
             Sections::class,

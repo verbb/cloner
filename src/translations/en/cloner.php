@@ -5,6 +5,7 @@ return [
   'Couldn’t clone category group - {i}.' => 'Couldn’t clone category group - {i}.',
   'Couldn’t clone entry type - {i}.' => 'Couldn’t clone entry type - {i}.',
   'Couldn’t clone event type - {i}.' => 'Couldn’t clone event type - {i}.',
+  'Couldn’t clone field - {i}.' => 'Couldn’t clone field - {i}.',
   'Couldn’t clone filesystem - {i}.' => 'Couldn’t clone filesystem - {i}.',
   'Couldn’t clone global set - {i}.' => 'Couldn’t clone global set - {i}.',
   'Couldn’t clone list type - {i}.' => 'Couldn’t clone list type - {i}.',
@@ -17,6 +18,7 @@ return [
   'Couldn’t clone voucher type - {i}.' => 'Couldn’t clone voucher type - {i}.',
   'Entry type cloned successfully.' => 'Entry type cloned successfully.',
   'Event type cloned successfully.' => 'Event type cloned successfully.',
+  'Field cloned successfully.' => 'Field cloned successfully.',
   'Filesystem cloned successfully.' => 'Filesystem cloned successfully.',
   'Global set cloned successfully.' => 'Global set cloned successfully.',
   'List type cloned successfully.' => 'List type cloned successfully.',
@@ -28,4 +30,5 @@ return [
   'User group cloned successfully.' => 'User group cloned successfully.',
   'Volume cloned successfully.' => 'Volume cloned successfully.',
   'Voucher type cloned successfully.' => 'Voucher type cloned successfully.',
+  '{type} fields manage their own nested field layouts, which Cloner can’t copy yet.' => '{type} fields manage their own nested field layouts, which Cloner can’t copy yet.',
 ];

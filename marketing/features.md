@@ -11,6 +11,7 @@ The second section with a familiar shape should not take as long as the first. S
 
 <!-- feature-grid -->
 - :icon[layout-list] **Sections and entry types** Duplicate established content structures and their configuration.
+- :icon[forms] **Fields** Start a new field from an existing field’s settings instead of configuring it again.
 - :icon[category] **Category and tag groups** Create a new taxonomy from an existing group’s setup.
 - :icon[users-group] **User groups** Reuse a group as the basis for a new permissions workflow.
 - :icon[folder] **Volumes and filesystems** Copy asset storage configurations before tailoring the destination.

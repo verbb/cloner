@@ -9,6 +9,7 @@ Cloner supports:
 - Asset Transforms
 - Category Groups
 - Entry Types
+- Fields
 - Filesystems
 - Global Sets
 - Sections
@@ -38,6 +39,10 @@ If you only need another entry type and your Craft installation provides **Save 
 Cloner copies configuration, not content. Category and tag groups do not include their categories or tags, global sets do not include their content values, volumes do not duplicate assets, and user groups do not assign any users. A cloned user group does retain the source group's permissions.
 
 Event types, list types and voucher types copy their settings, field layouts and per-site settings, but not their events, lists or vouchers. A cloned event type has its own event, session and ticket type field layouts. A cloned list type is never made the default list type.
+
+Fields copy their type, instructions, search and translation options, and type-specific settings, but not any content stored in the source field. A cloned field is not added to any field layouts. A cloned Matrix field uses the same entry types as the source by reference rather than separate copies. A cloned Content Block field gets its own copy of the source's field layout.
+
+Fields that manage their own nested field layouts, such as Neo, Vizy and Hyper fields, can't be cloned yet. Cloner reports an error for these rather than creating a field that would share its layouts with the source.
 
 Sections retain their configured entry types by reference. Cloner does not create separate copies of those entry types. Channel and structure sections keep their per-site URI formats; a cloned Single receives a distinct URI so it does not conflict with the source.
 

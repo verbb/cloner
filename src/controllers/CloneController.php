@@ -4,6 +4,7 @@ namespace verbb\cloner\controllers;
 use verbb\cloner\Cloner;
 
 use Craft;
+use craft\fields\MissingField;
 use craft\helpers\Json;
 use craft\web\Controller;
 
@@ -257,6 +258,44 @@ class CloneController extends Controller
         }
 
         Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Site cloned successfully.'));
+
+        return $this->asJson(['success' => true]);
+    }
+
+    public function actionField(): Response
+    {
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
+
+        $fieldsService = Craft::$app->getFields();
+        $oldField = $fieldsService->getFieldById($id);
+
+        // Only fields listed in Settings → Fields can be cloned. Nested-context fields belong to their owner, and a missing field type has no settings to copy.
+        if ($oldField && ($oldField->context !== 'global' || $oldField instanceof MissingField)) {
+            $oldField = null;
+        }
+
+        $oldField = $this->_requireSource($oldField, 'field');
+
+        if (!Cloner::$plugin->getFields()->canCloneField($oldField)) {
+            $error = Craft::t('cloner', '{type} fields manage their own nested field layouts, which Cloner can’t copy yet.', ['type' => $oldField::displayName()]);
+            Craft::$app->getSession()->setError($error);
+
+            return $this->asFailure($error);
+        }
+
+        $field = Cloner::$plugin->getFields()->setupClonedField($oldField, $name, $handle);
+
+        if (!$fieldsService->saveField($field)) {
+            $error = Craft::t('cloner', 'Couldn’t clone field - {i}.', ['i' => Json::encode($field->getErrors())]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
+
+            return $this->asFailure($error);
+        }
+
+        Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Field cloned successfully.'));
 
         return $this->asJson(['success' => true]);
     }

@@ -5,6 +5,7 @@ Start from an existing configuration and let Cloner copy its settings, then chan
 ## Features
 
 - Duplicate sections and entry types without copying their content.
+- Copy a field's settings into a new field, ready to add to other layouts.
 - Create a new category or tag group from an existing group's setup.
 - Copy a user group's permissions as the basis for a new role.
 - Copy volumes and filesystems before tailoring the destination.

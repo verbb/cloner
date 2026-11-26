@@ -6,6 +6,7 @@ use verbb\cloner\services\ImageTransforms;
 use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
 use verbb\cloner\services\EventTypes;
+use verbb\cloner\services\Fields;
 use verbb\cloner\services\Filesystems;
 use verbb\cloner\services\GlobalSets;
 use verbb\cloner\services\ListTypes;
@@ -46,6 +47,7 @@ trait PluginTrait
                 'categoryGroups' => CategoryGroups::class,
                 'entryTypes' => EntryTypes::class,
                 'eventTypes' => EventTypes::class,
+                'fields' => Fields::class,
                 'filesystems' => Filesystems::class,
                 'globalSets' => GlobalSets::class,
                 'listTypes' => ListTypes::class,
@@ -82,6 +84,11 @@ trait PluginTrait
     public function getEventTypes(): EventTypes
     {
         return $this->get('eventTypes');
+    }
+
+    public function getFields(): Fields
+    {
+        return $this->get('fields');
     }
 
     public function getFilesystems(): Filesystems
