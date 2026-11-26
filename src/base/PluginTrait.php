@@ -5,12 +5,15 @@ use verbb\cloner\Cloner;
 use verbb\cloner\services\ImageTransforms;
 use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
+use verbb\cloner\services\EventTypes;
 use verbb\cloner\services\Filesystems;
 use verbb\cloner\services\GlobalSets;
+use verbb\cloner\services\ListTypes;
 use verbb\cloner\services\Sections;
 use verbb\cloner\services\Sites;
 use verbb\cloner\services\TagGroups;
 use verbb\cloner\services\UserGroups;
+use verbb\cloner\services\VoucherTypes;
 use verbb\cloner\services\Volumes;
 
 use verbb\base\LogTrait;
@@ -42,14 +45,17 @@ trait PluginTrait
                 'imageTransforms' => ImageTransforms::class,
                 'categoryGroups' => CategoryGroups::class,
                 'entryTypes' => EntryTypes::class,
+                'eventTypes' => EventTypes::class,
                 'filesystems' => Filesystems::class,
                 'globalSets' => GlobalSets::class,
+                'listTypes' => ListTypes::class,
                 'sections' => Sections::class,
                 'service' => Service::class,
                 'sites' => Sites::class,
                 'tagGroups' => TagGroups::class,
                 'userGroups' => UserGroups::class,
                 'volumes' => Volumes::class,
+                'voucherTypes' => VoucherTypes::class,
             ],
         ];
     }
@@ -73,6 +79,11 @@ trait PluginTrait
         return $this->get('entryTypes');
     }
 
+    public function getEventTypes(): EventTypes
+    {
+        return $this->get('eventTypes');
+    }
+
     public function getFilesystems(): Filesystems
     {
         return $this->get('filesystems');
@@ -81,6 +92,11 @@ trait PluginTrait
     public function getGlobalSets(): GlobalSets
     {
         return $this->get('globalSets');
+    }
+
+    public function getListTypes(): ListTypes
+    {
+        return $this->get('listTypes');
     }
 
     public function getEntries(): Sections
@@ -111,6 +127,11 @@ trait PluginTrait
     public function getVolumes(): Volumes
     {
         return $this->get('volumes');
+    }
+
+    public function getVoucherTypes(): VoucherTypes
+    {
+        return $this->get('voucherTypes');
     }
 
 }

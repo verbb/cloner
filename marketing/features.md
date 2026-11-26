@@ -17,6 +17,7 @@ The second section with a familiar shape should not take as long as the first. S
 - :icon[photo] **Asset transforms** Repeat image-transform settings without re-entering every dimension and mode.
 - :icon[world] **Global sets** Create a new global-set configuration from a proven starting point.
 - :icon[world-www] **Sites** Duplicate an existing site’s language, base URL and other settings as a new starting point.
+- :icon[puzzle] **Verbb plugins** Clone event types, wishlist list types and gift voucher types alongside Craft’s own settings.
 <!-- feature-grid-end -->
 
 <!-- feature-section -->

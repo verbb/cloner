@@ -12,6 +12,10 @@ use yii\web\Response;
 
 use Throwable;
 
+use verbb\events\Events;
+use verbb\giftvoucher\GiftVoucher;
+use verbb\wishlist\Wishlist;
+
 class CloneController extends Controller
 {
     // Public Methods
@@ -280,8 +284,96 @@ class CloneController extends Controller
         return $this->asJson(['success' => true]);
     }
 
+    public function actionEventType(): Response
+    {
+        $this->_requirePlugin('events');
+
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
+
+        $eventTypesService = Events::$plugin->getEventTypes();
+        $oldEventType = $this->_requireSource($eventTypesService->getEventTypeById($id), 'event type');
+
+        $eventType = Cloner::$plugin->getEventTypes()->setupClonedEventType($oldEventType, $name, $handle);
+
+        if (!$eventTypesService->saveEventType($eventType)) {
+            $error = Craft::t('cloner', 'Couldn’t clone event type - {i}.', ['i' => Json::encode($eventType->getErrors())]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
+
+            return $this->asFailure($error);
+        }
+
+        Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Event type cloned successfully.'));
+
+        return $this->asJson(['success' => true]);
+    }
+
+    public function actionVoucherType(): Response
+    {
+        $this->_requirePlugin('gift-voucher');
+
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
+
+        $voucherTypesService = GiftVoucher::$plugin->getVoucherTypes();
+        $oldVoucherType = $this->_requireSource($voucherTypesService->getVoucherTypeById($id), 'voucher type');
+
+        $voucherType = Cloner::$plugin->getVoucherTypes()->setupClonedVoucherType($oldVoucherType, $name, $handle);
+
+        if (!$voucherTypesService->saveVoucherType($voucherType)) {
+            $error = Craft::t('cloner', 'Couldn’t clone voucher type - {i}.', ['i' => Json::encode($voucherType->getErrors())]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
+
+            return $this->asFailure($error);
+        }
+
+        Craft::$app->getSession()->setNotice(Craft::t('cloner', 'Voucher type cloned successfully.'));
+
+        return $this->asJson(['success' => true]);
+    }
+
+    public function actionListType(): Response
+    {
+        $this->_requirePlugin('wishlist');
+
+        $id = (int)$this->request->getRequiredBodyParam('id');
+        $name = (string)$this->request->getRequiredBodyParam('name');
+        $handle = (string)$this->request->getRequiredBodyParam('handle');
+
+        $listTypesService = Wishlist::$plugin->getListTypes();
+        $oldListType = $this->_requireSource($listTypesService->getListTypeById($id), 'list type');
+
+        $listType = Cloner::$plugin->getListTypes()->setupClonedListType($oldListType, $name, $handle);
+
+        if (!$listTypesService->saveListType($listType)) {
+            $error = Craft::t('cloner', 'Couldn’t clone list type - {i}.', ['i' => Json::encode($listType->getErrors())]);
+            Craft::$app->getSession()->setError($error);
+            Cloner::error($error);
+
+            return $this->asFailure($error);
+        }
+
+        Craft::$app->getSession()->setNotice(Craft::t('cloner', 'List type cloned successfully.'));
+
+        return $this->asJson(['success' => true]);
+    }
+
     // Private Methods
     // =========================================================================
+
+    private function _requirePlugin(string $handle): void
+    {
+        // Plugin integrations are optional, so their classes can only be touched once the plugin is installed and enabled.
+        if (!Craft::$app->getPlugins()->isPluginEnabled($handle)) {
+            throw new BadRequestHttpException(Craft::t('cloner', 'The {plugin} plugin is not enabled.', [
+                'plugin' => $handle,
+            ]));
+        }
+    }
 
     private function _requireSource(mixed $source, string $type): mixed
     {

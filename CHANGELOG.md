@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- Added cloning for Events event types, Wishlist list types and Gift Voucher voucher types ([#8](https://github.com/verbb/cloner/issues/8)).
+
 ## 3.0.6 - 2026-10-22
 
 ### Changed

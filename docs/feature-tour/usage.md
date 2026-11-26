@@ -17,6 +17,14 @@ Cloner supports:
 - User Groups
 - Volumes
 
+Cloner also supports settings from other Verbb plugins when they're installed and enabled:
+
+- Event Types in [Events](https://verbb.io/craft-plugins/events)
+- List Types in [Wishlist](https://verbb.io/craft-plugins/wishlist)
+- Voucher Types in [Gift Voucher](https://verbb.io/craft-plugins/gift-voucher)
+
+Navigation has its own **Duplicate** action on each menu's settings screen, which also copies the menu's nodes.
+
 ## Clone Configuration
 
 Open the relevant settings index, select the `+` action beside the configuration you want to copy, and enter a distinct name. Cloner generates a handle from that name and saves the new configuration through Craft's project config. Open the copy afterwards to review the generated handle and any values that must be unique to its destination.
@@ -28,6 +36,8 @@ If you only need another entry type and your Craft installation provides **Save 
 ## What Gets Copied
 
 Cloner copies configuration, not content. Category and tag groups do not include their categories or tags, global sets do not include their content values, volumes do not duplicate assets, and user groups do not assign any users. A cloned user group does retain the source group's permissions.
+
+Event types, list types and voucher types copy their settings, field layouts and per-site settings, but not their events, lists or vouchers. A cloned event type has its own event, session and ticket type field layouts. A cloned list type is never made the default list type.
 
 Sections retain their configured entry types by reference. Cloner does not create separate copies of those entry types. Channel and structure sections keep their per-site URI formats; a cloned Single receives a distinct URI so it does not conflict with the source.
 

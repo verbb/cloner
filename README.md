@@ -14,6 +14,7 @@ Start from an existing configuration and let Cloner copy its settings, then chan
 - Repeat image-transform settings without re-entering every dimension and mode.
 - Create a new global set from an existing one.
 - Duplicate an existing site's settings before tailoring its name, handle, language, and URL.
+- Clone event types, wishlist list types, and gift voucher types from Verbb's Events, Wishlist, and Gift Voucher plugins.
 
 ## Documentation
 

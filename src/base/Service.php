@@ -5,14 +5,18 @@ use verbb\cloner\events\RegisterClonerGroupEvent;
 use verbb\cloner\services\ImageTransforms;
 use verbb\cloner\services\CategoryGroups;
 use verbb\cloner\services\EntryTypes;
+use verbb\cloner\services\EventTypes;
 use verbb\cloner\services\Filesystems;
 use verbb\cloner\services\GlobalSets;
+use verbb\cloner\services\ListTypes;
 use verbb\cloner\services\Sections;
 use verbb\cloner\services\Sites;
 use verbb\cloner\services\TagGroups;
 use verbb\cloner\services\UserGroups;
+use verbb\cloner\services\VoucherTypes;
 use verbb\cloner\services\Volumes;
 
+use Craft;
 use craft\base\Component;
 use craft\helpers\StringHelper;
 use craft\models\FieldLayout;
@@ -44,6 +48,19 @@ class Service extends Component
             UserGroups::class,
             Volumes::class,
         ];
+
+        // Verbb plugin integrations only show their clone buttons while the plugin they clone for is enabled.
+        $pluginClasses = [
+            EventTypes::class,
+            ListTypes::class,
+            VoucherTypes::class,
+        ];
+
+        foreach ($pluginClasses as $pluginClass) {
+            if (Craft::$app->getPlugins()->isPluginEnabled($pluginClass::$pluginHandle)) {
+                $registeredClasses[] = $pluginClass;
+            }
+        }
 
         foreach ($registeredClasses as $registeredClass) {
             $groups[$registeredClass::$matchedRoute] = [
@@ -100,6 +117,7 @@ class Service extends Component
                 $this->_cycleUids($value, $uidMap);
             }
         }
+
         unset($value);
     }
 
@@ -112,6 +130,7 @@ class Service extends Component
                 $value = strtr($value, $uidMap);
             }
         }
+
         unset($value);
     }
 }
