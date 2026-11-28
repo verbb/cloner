@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.1.0 - 2026-11-29
 
 ### Added
 - Added cloning for fields ([#7](https://github.com/verbb/cloner/issues/7)).
